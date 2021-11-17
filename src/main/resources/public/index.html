@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pacman</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/view.js"></script>
+</head>
+<style>
+    .item1 {
+        grid-area: info;
+    }
+    .item2 {
+        grid-area: canvas;
+        /*overflow: scroll;*/
+        /*height:auto*/
+    }
+    .container {
+        display: grid;
+        grid-template-areas:
+                'info'
+                'canvas';
+        grid-gap: 10px;
+        /*background-color: lightskyblue;*/
+        padding: 10px;
+        width: 1200px;
+        margin:auto;
+    }
+    div {
+        /*background-color: white;
+        text-align: center;
+        padding: 0px;*/
+    }
+</style>
+<body>
+<div style="position:center; top:3em; left:0em;">
+    <div class="container">
+        <div class="item1" style="position:center; top:0em; left:0em; width: 840px;">
+            <div id="life_text" style="float: left">
+                <label>Life: </label>
+                <img src="heart.png" id="life_1" alt="1st heart" width="30px" height="30px">
+                <img src="heart.png" id="life_2" alt="2nd heart" width="30px" height="30px">
+                <img src="heart.png" id="life_3" alt="3rd heart" width="30px" height="30px">
+            </div>
+            <div id="score_text" style="float: right">
+                <p>Score: 100</p>
+            </div>
+        </div>
+        <div class="item2" style="position:center; top:3em; left:0em;">
+                <canvas id="map-canvas" width="840" height="900" style = "background-color: black; z-index: 0; position: absolute;"></canvas>
+                <canvas id="dynamic-canvas" width="840" height="900" style="z-index: 1; position: absolute;"></canvas><br/>
+                <!--            <canvas width="900" height="900" style="border: 1px solid #000000"></canvas>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
