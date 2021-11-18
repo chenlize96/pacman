@@ -3,10 +3,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.rice.comp504</groupId>
-    <artifactId>hw7</artifactId>
+    <artifactId>hw8</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>hw7</name>
+    <name>hw8</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -102,11 +102,11 @@
                 <configuration>
                     <jdkVersion>${jdk.version}</jdkVersion>
                     <!-- Use your own application name -->
-                    <appName>pacman-api-team-dog</appName>
+                    <appName>pacman-final-team-dog</appName>
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
                         <!-- You might have to remove the ./ in front   -->
-                        <web>java -jar ./target/hw7-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
+                        <web>java -jar ./target/hw8-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
