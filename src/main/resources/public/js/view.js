@@ -24,8 +24,7 @@ let pacmanLastLocX;
 let pacmanLastLocY;
 let pacmanVelX;
 let pacmanVelY;
-let framePerInterval = 3;
-let framePeriod = 100;
+let framePerInterval = 20;
 
 
 let ghostFrame;
@@ -124,16 +123,28 @@ window.onload = function() {
             case "w":
                 pacmanDir = 0;
                 break;
+            case "ArrowUp":
+                pacmanDir = 0;
+                break;
             // right = 1
             case "d":
+                pacmanDir = 1;
+                break;
+            case "ArrowRight":
                 pacmanDir = 1;
                 break;
             // down = 2
             case "s":
                 pacmanDir = 2;
                 break;
+            case "ArrowDown":
+                pacmanDir = 2;
+                break;
             // left = 3
             case "a":
+                pacmanDir = 3;
+                break;
+            case "ArrowLeft":
                 pacmanDir = 3;
                 break;
             // undefined = do nothing
@@ -154,7 +165,7 @@ function updateWorld() {
     $.get("/update", {pacmanDirection: pacmanDir}, function(data) {
         console.log(data);
         clearInterval(frameInterval);
-        frameInterval = setInterval(dynamicRender, framePeriod, data);
+        frameInterval = setInterval(dynamicRender, 17, data);
 
     }, "json");
 }
