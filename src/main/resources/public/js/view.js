@@ -24,7 +24,8 @@ let pacmanLastLocX;
 let pacmanLastLocY;
 let pacmanVelX;
 let pacmanVelY;
-let framePerInterval = 20;
+let framePerInterval = 3;
+let framePeriod = 100;
 
 
 let ghostFrame;
@@ -153,7 +154,7 @@ function updateWorld() {
     $.get("/update", {pacmanDirection: pacmanDir}, function(data) {
         console.log(data);
         clearInterval(frameInterval);
-        frameInterval = setInterval(dynamicRender, 17, data);
+        frameInterval = setInterval(dynamicRender, framePeriod, data);
 
     }, "json");
 }
