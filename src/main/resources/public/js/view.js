@@ -114,11 +114,27 @@ window.onload = function() {
     clearInterval(frameInterval);
 
     $('body').keydown(e => {
-        console.log("current direction is: " ,pacmanDir);
-        console.log(`key=${e.key},code=${e.code}`);
-        let keyPressed = e.key.toString();
-        console.log("key pressed is: ", keyPressed);
-        switch (keyPressed) {
+        //console.log("current direction is: " ,pacmanDir);
+        //console.log(`key=${e.key},code=${e.code}`);
+        //let keyPressed = e.key.toString();
+        //console.log("key pressed is: ", keyPressed);
+        if (e.key === "w" || e.key === "ArrowUp") {
+            pacmanDir = 0;
+            console.log(`key=${e.key},code=${e.code}`);
+        }
+        if (e.key === "d" || e.key === "ArrowRight") {
+            pacmanDir = 1;
+            console.log(`key=${e.key},code=${e.code}`);
+        }
+        if (e.key === "s" || e.key === "ArrowDown") {
+            pacmanDir = 2;
+            console.log(`key=${e.key},code=${e.code}`);
+        }
+        if (e.key === "a" || e.key === "ArrowLeft") {
+            pacmanDir = 3;
+            console.log(`key=${e.key},code=${e.code}`);
+        }
+       /** switch (keyPressed) {
             // up = 0
             case "w":
                 pacmanDir = 0;
@@ -150,7 +166,7 @@ window.onload = function() {
             // undefined = do nothing
             default:
                 break;
-        }
+        }**/
         console.log("after direction is: " ,pacmanDir);
     });
     intervalID = setInterval(updateWorld, 500);
@@ -188,7 +204,7 @@ function pacmanRender(pacman) {
         // console.log("pacmanVelY: ", pacmanVelY);
         // console.log("pacmanLastLocX: ", pacmanLastLocX);
         // console.log("pacmanLastLocY: ", pacmanLastLocY);
-        pacmanDir = pacman.currDir;
+        //pacmanDir = pacman.currDir;
     }
     // Set up new render location.
     pacmanLastLocX = pacmanLastLocX + pacmanVelX;
