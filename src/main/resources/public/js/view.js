@@ -14,6 +14,9 @@ var dotImg = new Image();
 var floorImg = new Image();
 var wallImg = new Image();
 var fruitImg = new Image();
+var brownImg = new Image();
+var woodImg = new Image();
+var redImg = new Image();
 
 let pacmanDir;
 let pacmanFrame;
@@ -113,6 +116,9 @@ window.onload = function() {
     clearInterval(intervalID);
     clearInterval(frameInterval);
 
+    $('#easy').click(getEasyLevel);
+    $('#hard').click(getHardLevel);
+
     $('body').keydown(e => {
         //console.log("current direction is: " ,pacmanDir);
         //console.log(`key=${e.key},code=${e.code}`);
@@ -137,6 +143,7 @@ window.onload = function() {
        /** switch (keyPressed) {
             // up = 0
             case "w":
+            case "ArrowUp":
                 pacmanDir = 0;
                 break;
             case "ArrowUp":
@@ -144,6 +151,7 @@ window.onload = function() {
                 break;
             // right = 1
             case "d":
+            case "ArrowRight":
                 pacmanDir = 1;
                 break;
             case "ArrowRight":
@@ -151,6 +159,7 @@ window.onload = function() {
                 break;
             // down = 2
             case "s":
+            case "ArrowDown":
                 pacmanDir = 2;
                 break;
             case "ArrowDown":
@@ -158,6 +167,7 @@ window.onload = function() {
                 break;
             // left = 3
             case "a":
+            case "ArrowLeft":
                 pacmanDir = 3;
                 break;
             case "ArrowLeft":
@@ -390,6 +400,9 @@ function imageInitialize() {
     ghostPinkImg.src = "ghost_pink.png";
     ghostOrangeImg.src = "ghost_orange.png";
     ghostCyanImg.src = "ghost_cyan.png";
+    brownImg.src = "brown.png";
+    woodImg.src = "wood.png";
+    redImg.src = "red.png";
 }
 
 /**
@@ -430,6 +443,12 @@ function mapRender(map2DArray) {
                     wScale * 2, hScale * 2);
             } else if (map2DArray[h][w] === 'S') {
                 app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
+            } else if (map2DArray[h][w] === 'B') {
+                app.drawFullImage(brownImg, locX, locY, wScale, hScale);
+            } else if (map2DArray[h][w] === 'b') {
+                app.drawFullImage(woodImg, locX, locY, wScale, hScale);
+            } else if (map2DArray[h][w] === 'R') {
+                app.drawFullImage(redImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'E') {
                 //console.log("Empty index, render Nothing...");
             } else if (map2DArray[h][w] === 'P') {
@@ -484,6 +503,23 @@ function mapRender(map2DArray) {
  */
 function canvasDims() {
     $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width}, function (data) {
+        console.log(data);
+        mapRender(data);
+    }, "json");
+}
+
+/**
+ * Set the easy level
+ */
+function getEasyLevel() {
+    location.reload();
+}
+
+/**
+ * Set the hard level
+ */
+function getHardLevel() {
+    $.post("/level", {level: "hard"}, function (data) {
         console.log(data);
         mapRender(data);
     }, "json");

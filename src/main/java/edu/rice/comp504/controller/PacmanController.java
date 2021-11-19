@@ -37,6 +37,12 @@ public class PacmanController {
             dis.removeAll();
             return gson.toJson("clear");
         });
+
+        post("/level", (request, response) -> {
+            System.out.println(request.queryMap().value("level"));
+            dis.removeAll();
+            return gson.toJson(dis.initializeLevel("hard"));
+        });
     }
 
 

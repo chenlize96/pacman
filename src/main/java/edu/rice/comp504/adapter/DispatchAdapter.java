@@ -1,5 +1,6 @@
 package edu.rice.comp504.adapter;
 
+import edu.rice.comp504.model.LevelStore;
 import edu.rice.comp504.model.PacmanStore;
 
 
@@ -40,39 +41,10 @@ public class DispatchAdapter {
 
     /**
      * initialize the game. (For Dinghua, API Design Section)
-     * @param fileName the file name, named by the level of the game.
+     * @param level the file name, named by the level of the game.
      */
-    public String[][] initializeLevel(String fileName) {
-        String input = "W W W W W W W W W W W W W W W W W W W W W W W W W W W W\n" +
-                "W L D D D D D D D D D D D W W D D D D D D D D D D D L W\n" +
-                "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-                "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-                "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-                "W D D D D D D D D D D D D D D D D D D D D D D D D D D W\n" +
-                "W D W W W W D W W D W W W W W W W W D W W D W W W W D W\n" +
-                "W D W W W W D W W D W W W W W W W W D W W D W W W W D W\n" +
-                "W D D D D D D W W D D D D W W D D D D W W D D D D D D W\n" +
-                "W W W W W W D W W W W W D W W D W W W W W D W W W W W W\n" +
-                "W W W W W W D W W W W W E W W E W W W W W D W W W W W W\n" +
-                "W W W W W W D W W E E E E E E E E E E W W D W W W W W W\n" +
-                "W W W W W W D W W E W E W W W W E W E W W D W W W W W W\n" +
-                "W W W W W W D W W E W E 1 E 3 E E W E W W D W W W W W W\n" +
-                "E E E S E E D E E E W E E 2 E 4 E W E E E D E E E E E E\n" +
-                "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-                "W W W W W W D W W E E E E E E E E E E W W D W W W W W W\n" +
-                "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-                "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-                "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-                "W D D D D D D D D D D D D W W D D D D D D D D D D D D W\n" +
-                "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-                "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-                "W D D D W W D D D D D D D D D D D D D D D D W W D D D W\n" +
-                "W W W D W W D W W D W W W W W W W W D W W D W W D W W W\n" +
-                "W W W D W W D W W D W W W W W W W W D W W D W W D W W W\n" +
-                "W D D D D D D W W D D D D W W D D D D W W D D D D D D W\n" +
-                "W D W W W W W W W W W W D W W D W W W W W W W W W W D W\n" +
-                "W L D D D D D D D D D D D D D P D D D D D D D D D D L W\n" +
-                "W W W W W W W W W W W W W W W W W W W W W W W W W W W W";
+    public String[][] initializeLevel(String level) {
+        String input = LevelStore.getTheLevel(level);
         row = 0;
         col = 0;
         String[] lineSplit = input.split("\n");
