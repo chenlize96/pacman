@@ -1,7 +1,7 @@
 # Game Development 
 
 ## Team Dog
-https://pacman-api-team-dog.herokuapp.com/
+https://pacman-final-team-dog.herokuapp.com/
 
 Please use W, A, S, D to move the pacman.
 

@@ -40,6 +40,9 @@ public class PacmanStore {
                 Point loc = new Point(row, col);
                 switch (info[row][col]) {
                     case "W":
+                    case "B":
+                    case "b":
+                    case "R":
                         obj = new Wall(loc);
                         break;
                     case "D":
