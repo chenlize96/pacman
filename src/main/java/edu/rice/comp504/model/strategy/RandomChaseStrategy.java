@@ -10,6 +10,9 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Flashing pattern.
+ */
 public class RandomChaseStrategy implements IUpdateStrategy {
 
     private static IUpdateStrategy singleton;
@@ -37,7 +40,7 @@ public class RandomChaseStrategy implements IUpdateStrategy {
      */
     @Override
     public String getName() {
-        return "RandomChase";
+        return "random";
     }
 
 
