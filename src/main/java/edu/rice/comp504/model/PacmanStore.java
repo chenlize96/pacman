@@ -61,6 +61,9 @@ public class PacmanStore {
                         obj = new Pacman("pacman", loc, loc, 1); // dir = right
                         addCharacterToStore((PropertyChangeListener) obj);
                         break;
+                    case "T":
+                        obj = new TransportCell(loc);
+                        break;
                     case "1":
                         obj = new Ghost("ghost", loc, loc, 1); // dir = right
                         ((Ghost) obj).setName("red");
