@@ -10,7 +10,9 @@ import edu.rice.comp504.model.strategy.GhostStrategyFac;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -23,6 +25,10 @@ public class PacmanStore {
     private static APaintObject[][] grid;
     private static int score;
     private static List<AItem> eatenItems;
+    private static long lastFruitAppearTime;
+    private static final long fruitDisappearTime = 5000; //5s
+    private static final long fruitAppearTime = 3000; //3s
+    private static boolean fruitAppear;
 
     /**
      * Constructor.
@@ -39,6 +45,8 @@ public class PacmanStore {
     public void initialize(String[][] info) {
         score = 0;
         eatenItems = new ArrayList<>();
+        lastFruitAppearTime = System.currentTimeMillis();
+        fruitAppear = true;
         grid = new APaintObject[info.length][info[0].length];
         APaintObject obj;
         for (int row = 0; row < info.length; row++) {
@@ -148,6 +156,25 @@ public class PacmanStore {
      * Call the update method on all the character observers to update their position in the pacman world.
      */
     public static PropertyChangeListener[] updatePacmanWorld() {
+        // update fruit
+        long currentTime = System.currentTimeMillis();
+        if(currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
+            setFruitAppear(false);
+        } else if(!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime){
+            setFruitAppear(true);
+            // TODO: performance issue, 240 dots, acceptable?
+            //remove fruit item from eaten items
+            Iterator<AItem> iterator = eatenItems.iterator();
+            while (iterator.hasNext()) {
+                AItem item = iterator.next();
+                if (item.getType().equals("fruit")) {
+                    iterator.remove();
+                }
+            }
+            // update lastFruitAppearTime
+            lastFruitAppearTime = currentTime;
+        }
+        // update characters
         pcs.firePropertyChange("theClock", false,
                 /*pass update cmd*/new UpdateStateCmd(pcs.getPropertyChangeListeners("theClock")));
         return pcs.getPropertyChangeListeners();
@@ -208,6 +235,15 @@ public class PacmanStore {
     public static void removeTheGhost(PropertyChangeListener wall) {
     }
 
+    public static boolean isFruitAppear() {
+        return fruitAppear;
+    }
+
+    public static void setFruitAppear(boolean fruitAppear) {
+        PacmanStore.fruitAppear = fruitAppear;
+    }
+
+
     public static int getScore() {
         return score;
     }
@@ -218,5 +254,13 @@ public class PacmanStore {
 
     public static List<AItem> getEatenItems() {
         return eatenItems;
+    }
+
+    public long getLastFruitAppearTime() {
+        return lastFruitAppearTime;
+    }
+
+    public void setLastFruitAppearTime(long lastFruitAppearTime) {
+        this.lastFruitAppearTime = lastFruitAppearTime;
     }
 }

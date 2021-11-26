@@ -43,6 +43,7 @@ public class UpdateStateCmd implements IPaintObjCmd {
                 } else if(type.equals("fruit")) {
                     PacmanStore.setScore(PacmanStore.getScore() + ((Fruit)grid[currLoc.x][currLoc.y]).score);
                     PacmanStore.addEatenItems((Fruit)grid[currLoc.x][currLoc.y]);
+                    PacmanStore.setFruitAppear(false);
                 }
             }
         } else {
