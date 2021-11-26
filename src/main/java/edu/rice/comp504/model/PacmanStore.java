@@ -10,6 +10,8 @@ import edu.rice.comp504.model.strategy.GhostStrategyFac;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,6 +21,8 @@ public class PacmanStore {
     private static PropertyChangeSupport pcs;
     private static Point dims;
     private static APaintObject[][] grid;
+    private static int score;
+    private static List<AItem> eatenItems;
 
     /**
      * Constructor.
@@ -33,6 +37,8 @@ public class PacmanStore {
      * @param info the letter map
      */
     public void initialize(String[][] info) {
+        score = 0;
+        eatenItems = new ArrayList<>();
         grid = new APaintObject[info.length][info[0].length];
         APaintObject obj;
         for (int row = 0; row < info.length; row++) {
@@ -111,6 +117,15 @@ public class PacmanStore {
         }
         return ONLY;*/
         return null;
+    }
+
+
+    /**
+     * add an eaten item to the list.
+     * @param item eaten item.
+     */
+    public static void addEatenItems(AItem item) {
+        eatenItems.add(item);
     }
 
     /**
@@ -193,4 +208,15 @@ public class PacmanStore {
     public static void removeTheGhost(PropertyChangeListener wall) {
     }
 
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        PacmanStore.score = score;
+    }
+
+    public static List<AItem> getEatenItems() {
+        return eatenItems;
+    }
 }
