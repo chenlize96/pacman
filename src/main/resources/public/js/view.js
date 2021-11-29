@@ -293,7 +293,7 @@ function ghostRender(ghost) {
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
                     redLastLocX, redLastLocY, wScale, hScale);*/
-                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
                     redLastLocX, redLastLocY, wScale, hScale);
             }
             else{
@@ -333,7 +333,7 @@ function ghostRender(ghost) {
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
                     pinkLastLocX, pinkLastLocY, wScale, hScale);*/
-                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
                     pinkLastLocX, pinkLastLocY, wScale, hScale);
             }
             else {
@@ -373,7 +373,7 @@ function ghostRender(ghost) {
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
                     orangeLastLocX, orangeLastLocY, wScale, hScale);*/
-                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
                     orangeLastLocX, orangeLastLocY, wScale, hScale);
             }
             else {
@@ -414,7 +414,7 @@ function ghostRender(ghost) {
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
                     orangeLastLocX, orangeLastLocY, wScale, hScale);*/
-                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
                     cyanLastLocX, cyanLastLocY, wScale, hScale);
             }
             else {

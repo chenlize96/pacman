@@ -101,7 +101,7 @@ public class InteractCmd implements IPaintObjCmd {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
                 ghost.setGhostStatus("vulnerable_dark_blue");
-                ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
+                ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
             }
         }
         PacmanStore.setCurrentFrame(0);
