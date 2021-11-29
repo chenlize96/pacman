@@ -3,6 +3,7 @@ package edu.rice.comp504.model;
 //import edu.rice.comp504.model.item.APaintObject;
 import edu.rice.comp504.model.agent.Ghost;
 import edu.rice.comp504.model.agent.Pacman;
+import edu.rice.comp504.model.cmd.InteractCmd;
 import edu.rice.comp504.model.cmd.UpdateStateCmd;
 import edu.rice.comp504.model.item.*;
 import edu.rice.comp504.model.strategy.GhostStrategyFac;
@@ -175,6 +176,8 @@ public class PacmanStore {
             lastFruitAppearTime = currentTime;
         }
         // update characters
+        pcs.firePropertyChange("theClock", false,
+                /*pass update cmd*/new InteractCmd(pcs.getPropertyChangeListeners("theClock")));
         pcs.firePropertyChange("theClock", false,
                 /*pass update cmd*/new UpdateStateCmd(pcs.getPropertyChangeListeners("theClock")));
         return pcs.getPropertyChangeListeners();
