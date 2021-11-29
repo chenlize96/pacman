@@ -60,7 +60,9 @@ let pinkDir;
 let fruitLocX;
 let fruitLocY;
 
-
+let ghostNum = 4;
+let fruitType = "S";
+let level = "easy";
 
 /**
  * Create the pacman map app for a canvas, it won't be modified during each level.
@@ -496,6 +498,19 @@ function dynamicRender(data) {
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
+    if(eatenDot.length==240){
+        if(level=="easy"){
+            alert("You finished easy level, now entering hard level!");
+            clear();
+            getHardLevel();
+        }
+        else{
+            alert("You finished hard level, now starting new game!");
+            clear();
+            getEasyLevel()
+        }
+        intervalID = setInterval(updateWorld, 500);
+    }
 }
 
 /**
@@ -636,7 +651,7 @@ function mapRender(map2DArray) {
  * Pass along the canvas dimensions
  */
 function canvasDims() {
-    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width}, function (data) {
+    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width, fruitType:fruitType, ghostNum:ghostNum}, function (data) {
         console.log(data);
         mapRender(data);
     }, "json");
@@ -647,15 +662,17 @@ function canvasDims() {
  */
 function getEasyLevel() {
     location.reload();
+    level = "easy";
 }
 
 /**
  * Set the hard level
  */
 function getHardLevel() {
-    $.post("/level", {level: "hard"}, function (data) {
+    $.post("/level", {level: "hard",fruitType:fruitType, ghostNum:ghostNum}, function (data) {
         console.log(data);
         mapRender(data);
+        level = "hard";
     }, "json");
 }
 
