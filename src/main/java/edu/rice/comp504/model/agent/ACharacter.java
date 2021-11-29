@@ -103,6 +103,10 @@ public abstract class ACharacter extends APaintObject implements PropertyChangeL
                     setLoc(new Point(tempX, PacmanStore.getGrid()[0].length - 1));
                     return false;
                 }
+                if (this.getType().equals("ghost") && tempY - 1 < 0) {
+                    setLoc(new Point(tempX, 0));
+                    this.setDir(1);
+                }
                 if (allMap[tempX][tempY - 1].getType().equals("wall")) {
                     return true;
                 }
