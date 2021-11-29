@@ -3,7 +3,11 @@ package edu.rice.comp504.adapter;
 import edu.rice.comp504.model.LevelStore;
 import edu.rice.comp504.model.PacmanStore;
 import edu.rice.comp504.model.ResponseBody;
+import edu.rice.comp504.model.agent.Ghost;
+import edu.rice.comp504.model.agent.Pacman;
 import edu.rice.comp504.model.item.AItem;
+import edu.rice.comp504.model.item.APaintObject;
+import edu.rice.comp504.model.strategy.GhostStrategyFac;
 
 
 import java.awt.*;
@@ -91,8 +95,8 @@ public class DispatchAdapter {
         PropertyChangeListener[] dynamics = PacmanStore.updatePacmanWorld();
         AItem[] eaten = new AItem[PacmanStore.getEatenItems().size()];
         PacmanStore.getEatenItems().toArray(eaten);
-        System.out.println(PacmanStore.isFruitAppear());
-        return new ResponseBody(dynamics,eaten,PacmanStore.getScore(),PacmanStore.isFruitAppear());
+        System.out.println("***" + PacmanStore.getLives());
+        return new ResponseBody(dynamics,eaten,PacmanStore.getScore(),PacmanStore.isFruitAppear(),PacmanStore.getLives());
     }
 
     /**

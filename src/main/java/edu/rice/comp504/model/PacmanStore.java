@@ -347,7 +347,28 @@ public class PacmanStore {
         return Blink_Frames;
     }
 
+    /**
+     * get ghost score lists.
+     * @return score lists.
+     */
     public static int[] getGhostScoreList() {
         return Ghost_Score_List;
+    }
+
+
+    /**
+     * get lives.
+     * @return lives.
+     */
+    public static int getLives() {
+        for (int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                APaintObject object = grid[i][j];
+                if (object.getType().equals("pacman")) {
+                    return ((Pacman)object).getLives();
+                }
+            }
+        }
+        return 0;
     }
 }
