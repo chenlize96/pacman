@@ -353,6 +353,7 @@ function ghostRender(ghost) {
 function dynamicRender(data) {
     dynamicApp.clear();
     let dynamics = data.dynamics;
+    let eatenDot = data.eaten;
     dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
@@ -371,6 +372,12 @@ function dynamicRender(data) {
                 console.log("Invalid sub object to process in front end.");
                 break;
         }
+    });
+
+    eatenDot.forEach(function(obj) {
+        let locX = obj.loc.y * wScale;
+        let locY = obj.loc.x * hScale;
+        app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
 }
 
