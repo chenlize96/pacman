@@ -16,7 +16,8 @@ var pacmanImg = new Image();
 var dotImg = new Image();
 var floorImg = new Image();
 var wallImg = new Image();
-var fruitImg = new Image();
+var strawberryImg = new Image();
+var appleImg = new Image();
 var brownImg = new Image();
 var woodImg = new Image();
 var redImg = new Image();
@@ -453,6 +454,7 @@ function dynamicRender(data) {
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
     let score = data.score;
+    let dotNum = 0;
     dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
@@ -476,11 +478,19 @@ function dynamicRender(data) {
     eatenDot.forEach(function(obj) {
         let locX = obj.loc.y * wScale;
         let locY = obj.loc.x * hScale;
+        if(obj.type == "dot") {
+            dotNum++;
+        }
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
 
     if(data.fruitAppear) {
-        app.drawFullImage(fruitImg, fruitLocX, fruitLocY, wScale, hScale);
+       if(fruitType=="strawberry"){
+           app.drawFullImage(strawberryImg, fruitLocX, fruitLocY, wScale, hScale);
+       }
+       else{
+           app.drawFullImage(appleImg, fruitLocX, fruitLocY, wScale, hScale);
+       }
     }
     if(data.lives !== 3) {
         if(data.lives === 2) {
@@ -498,7 +508,7 @@ function dynamicRender(data) {
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
-    if(eatenDot.length==240){
+    if(dotNum==240){
         if(level=="easy"){
             alert("You finished easy level, now entering hard level!");
             clear();
@@ -536,7 +546,8 @@ function imageInitialize() {
     floorImg.src = "floor.png";
     dotImg.src = "pellet.png";
     pacmanImg.src = "pacman.png";
-    fruitImg.src = "strawberry.png";
+    strawberryImg.src = "strawberry.png";
+    appleImg.src = "apple.png";
     ghostRedImg.src = "ghost_red.png";
     ghostPinkImg.src = "ghost_pink.png";
     ghostOrangeImg.src = "ghost_orange.png";
@@ -589,7 +600,7 @@ function mapRender(map2DArray) {
             } else if (map2DArray[h][w] === 'S') {
                 fruitLocX = locX;
                 fruitLocY = locY;
-                app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
+                //app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'B') {
                 app.drawFullImage(brownImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'b') {
