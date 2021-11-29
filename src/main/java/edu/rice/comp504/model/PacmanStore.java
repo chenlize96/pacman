@@ -30,6 +30,12 @@ public class PacmanStore {
     private static final long fruitDisappearTime = 5000; //5s
     private static final long fruitAppearTime = 3000; //3s
     private static boolean fruitAppear;
+    private static int currentFrame = -1;
+    private static int numEatenGhost = 0;
+
+    private static final int[] Ghost_Score_List = new int[]{200,400,800,1600};
+    private static final int Dark_Blue_Frames = 4;
+    private static final int Blink_Frames = 4;
 
     /**
      * Constructor.
@@ -238,32 +244,108 @@ public class PacmanStore {
     public static void removeTheGhost(PropertyChangeListener wall) {
     }
 
+    /**
+     * isFruitAppear.
+     * @return fruitAppear.
+     */
     public static boolean isFruitAppear() {
         return fruitAppear;
     }
 
+    /**
+     * setFruitAppear.
+     */
     public static void setFruitAppear(boolean fruitAppear) {
         PacmanStore.fruitAppear = fruitAppear;
     }
 
 
+    /**
+     * getScore.
+     * @return score.
+     */
     public static int getScore() {
         return score;
     }
 
+    /**
+     * setScore.
+     */
     public static void setScore(int score) {
         PacmanStore.score = score;
     }
 
+    /**
+     * getEatenItems.
+     * @return eatenItems.
+     */
     public static List<AItem> getEatenItems() {
         return eatenItems;
     }
 
+    /**
+     * getLastFruitAppearTime.
+     * @return lastFruitAppearTime.
+     */
     public long getLastFruitAppearTime() {
         return lastFruitAppearTime;
     }
 
+    /**
+     * setLastFruitAppearTime.
+     * @param lastFruitAppearTime lastFruitAppearTime.
+     */
     public void setLastFruitAppearTime(long lastFruitAppearTime) {
         this.lastFruitAppearTime = lastFruitAppearTime;
+    }
+
+    /**
+     * getCurrentFrame.
+     * @return currentFrame.
+     */
+    public static int getCurrentFrame() {
+        return currentFrame;
+    }
+
+    /**
+     * setCurrentFrame.
+     */
+    public static void setCurrentFrame(int currentFrame) {
+        PacmanStore.currentFrame = currentFrame;
+    }
+
+    /**
+     * getNumEatenGhost.
+     * @return numEatenGhost.
+     */
+    public static int getNumEatenGhost() {
+        return numEatenGhost;
+    }
+
+    /**
+     * setNumEatenGhost.
+     */
+    public static void setNumEatenGhost(int numEatenGhost) {
+        PacmanStore.numEatenGhost = numEatenGhost;
+    }
+
+    /**
+     * getDarkBlueFrames.
+     * @return Dark_Blue_Frames.
+     */
+    public static int getDarkBlueFrames() {
+        return Dark_Blue_Frames;
+    }
+
+    /**
+     * getBlinkFrames.
+     * @return Blink_Frames.
+     */
+    public static int getBlinkFrames() {
+        return Blink_Frames;
+    }
+
+    public static int[] getGhostScoreList() {
+        return Ghost_Score_List;
     }
 }

@@ -5,6 +5,7 @@ import edu.rice.comp504.model.agent.ACharacter;
 import edu.rice.comp504.model.agent.Ghost;
 import edu.rice.comp504.model.agent.Pacman;
 import edu.rice.comp504.model.item.*;
+import edu.rice.comp504.model.strategy.GhostStrategyFac;
 
 import java.awt.*;
 import java.beans.PropertyChangeListener;
@@ -31,12 +32,36 @@ public class InteractCmd implements IPaintObjCmd {
         if (context.getType().equals("pacman")) {
             Pacman pacman = (Pacman) context;
             collideWithDots(pacman);
-            if (collideWithGhost(pacman) != null) {
-                Ghost ghost = collideWithGhost(pacman); //todo check ghost's status.
-                resetCharacters(); //Pacman dies for now. todo pacman can eat ghosts.
+            // at this point, the pacman might have eaten the bigDot
+            // use while, cuzz we can meet many ghosts at the same time
+            // we can only collide with ghost whose status is not dead
+            while (collideWithGhost(pacman) != null) {
+                int currentFrame = PacmanStore.getCurrentFrame();
+                if(currentFrame > 0) {
+                    // ghost and score related
+                    Ghost ghost = collideWithGhost(pacman);
+                    ghost.setGhostStatus("dead");
+                    // TODO: dead ghost need to return to the home box
+                    ghost.setStrategy(new GhostStrategyFac().make("backHome"));
+
+                    PacmanStore.setNumEatenGhost(PacmanStore.getNumEatenGhost() + 1);
+                    int[] ghostScoreList = PacmanStore.getGhostScoreList();
+                    PacmanStore.setScore(PacmanStore.getScore() + ghostScoreList[Math.min(PacmanStore.getNumEatenGhost(),ghostScoreList.length - 1)]);
+                } else if(currentFrame == -1){ // currentFrame == -1
+                    Ghost ghost = collideWithGhost(pacman); //todo check ghost's status.
+                    resetCharacters(); //Pacman dies for now. todo pacman can eat ghosts.
+                    break;
+                }
             }
         }
 
+        PacmanStore.setCurrentFrame(PacmanStore.getCurrentFrame() + 1);
+        if (PacmanStore.getCurrentFrame() > PacmanStore.getDarkBlueFrames()) {
+            // all ghosts set to vulnerable_blink except those dead ones
+            setAllGhostVulnerableBlink();
+        } else if (PacmanStore.getCurrentFrame() == PacmanStore.getDarkBlueFrames() + PacmanStore.getBlinkFrames() + 1) {
+            becomeNormal();
+        }
     }
 
     /**
@@ -54,12 +79,58 @@ public class InteractCmd implements IPaintObjCmd {
             PacmanStore.setScore(PacmanStore.getScore() + ((BigDot) grid[currLoc.x][currLoc.y]).score);
             PacmanStore.addEatenItems((BigDot) grid[currLoc.x][currLoc.y]);
             grid[currLoc.x][currLoc.y] = new EmptyCell(new Point(currLoc.x, currLoc.y));
+            // all ghosts turn dark-blue for 4 frames, then blink for 4 frames
+            // don't need to consider that we eat 2 bigDots in 8 frames, due to the grid size
+            setAllGhostVulnerableAndStartTimer();
         } else if (type.equals("fruit")) {
             PacmanStore.setScore(PacmanStore.getScore() + ((Fruit) grid[currLoc.x][currLoc.y]).score);
             PacmanStore.addEatenItems((Fruit) grid[currLoc.x][currLoc.y]);
             grid[currLoc.x][currLoc.y] = new EmptyCell(new Point(currLoc.x, currLoc.y));
             PacmanStore.setFruitAppear(false);
         }
+    }
+
+    /**
+     * set all ghost vulnerable and start the timer.
+     */
+    private void setAllGhostVulnerableAndStartTimer() {
+        for (PropertyChangeListener pcl : iCharacters) {
+            if (((APaintObject) pcl).getType().equals("ghost")) {
+                Ghost ghost = (Ghost) pcl;
+                ghost.setGhostStatus("vulnerable_dark_blue");
+                ghost.setStrategy(new GhostStrategyFac().make("avoid"));
+            }
+        }
+        PacmanStore.setCurrentFrame(0);
+    }
+
+    /**
+     * set all ghost VulnerableBlink. Except those dead.
+     */
+    private void setAllGhostVulnerableBlink() {
+        for (PropertyChangeListener pcl : iCharacters) {
+            if (((APaintObject) pcl).getType().equals("ghost")) {
+                Ghost ghost = (Ghost) pcl;
+                if (!ghost.getGhostStatus().equals("dead")) {
+                    ghost.setGhostStatus("vulnerable_blink");
+                }
+            }
+        }
+    }
+
+    /**
+     * game becomes normal.
+     */
+    private void becomeNormal() {
+        for (PropertyChangeListener pcl : iCharacters) {
+            if (((APaintObject) pcl).getType().equals("ghost")) {
+                Ghost ghost = (Ghost) pcl;
+                ghost.setGhostStatus("normal");
+                ghost.setStrategy(new GhostStrategyFac().make("chase"));
+            }
+        }
+        PacmanStore.setCurrentFrame(-1);
+        PacmanStore.setNumEatenGhost(0);
     }
 
     /**
@@ -70,6 +141,10 @@ public class InteractCmd implements IPaintObjCmd {
         for (PropertyChangeListener pcl : iCharacters) {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
+                // we can only collide with ghost whose status is not dead
+                if (ghost.getGhostStatus().equals("dead")) {
+                    continue;
+                }
                 if (ghost.getLoc().equals(pacman.getLoc())) {
                     return ghost;
                 }
