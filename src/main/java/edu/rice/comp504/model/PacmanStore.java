@@ -24,6 +24,7 @@ public class PacmanStore {
     private static PropertyChangeSupport pcs;
     private static Point dims;
     private static APaintObject[][] grid;
+    private static String[][] info;
     private static int score;
     private static List<AItem> eatenItems;
     private static long lastFruitAppearTime;
@@ -44,6 +45,7 @@ public class PacmanStore {
      * @param info the letter map
      */
     public void initialize(String[][] info) {
+        this.info = info;
         score = 0;
         eatenItems = new ArrayList<>();
         lastFruitAppearTime = System.currentTimeMillis();
@@ -58,6 +60,7 @@ public class PacmanStore {
                     case "B":
                     case "b":
                     case "R":
+                    case "G":
                         obj = new Wall(loc);
                         break;
                     case "D":
@@ -114,6 +117,14 @@ public class PacmanStore {
      */
     public static APaintObject[][] getGrid() {
         return grid;
+    }
+
+    /**
+     * Return the letter grid.
+     * @return grid
+     */
+    public static String[][] getLetterGrid() {
+        return info;
     }
 
     /**

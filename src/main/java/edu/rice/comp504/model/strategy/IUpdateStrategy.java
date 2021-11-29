@@ -14,13 +14,9 @@ public interface IUpdateStrategy {
     String getName();
 
     /**
-     * Update the position of the pacman.
-     * @param context The pacman.
+     * Update the position of the ghosts.
+     * @param ghost The ghost
+     * @param ghost The pacman
      */
-    void updateState(ACharacter context);
-
-    /**
-     * Update the position of ghost.
-     * */
-    public void updateState(ACharacter pacman, ACharacter context);
+    void updateState(ACharacter ghost, ACharacter pacman);
 }

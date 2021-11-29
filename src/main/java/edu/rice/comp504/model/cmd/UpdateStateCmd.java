@@ -37,7 +37,7 @@ public class UpdateStateCmd implements IPaintObjCmd {
         } else {
             for (PropertyChangeListener iCharacter : iCharacters) {
                 if (((APaintObject)iCharacter).getType().equals("pacman")) {
-                    ((Ghost)context).getStrategy().updateState(context,((Pacman)iCharacter));
+                    ((Ghost)context).getStrategy().updateState(context, ((Pacman)iCharacter));
                     break;
                 }
             }
