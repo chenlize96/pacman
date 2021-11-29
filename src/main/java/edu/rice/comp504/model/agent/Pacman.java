@@ -1,6 +1,7 @@
 package edu.rice.comp504.model.agent;
 
 
+import edu.rice.comp504.model.cmd.IPaintObjCmd;
 import edu.rice.comp504.model.cmd.UpdateStateCmd;
 
 import java.awt.*;
@@ -67,7 +68,7 @@ public class Pacman extends ACharacter{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         //System.out.println("pacman");
-        ((UpdateStateCmd) evt.getNewValue()).execute(this);
+        ((IPaintObjCmd) evt.getNewValue()).execute(this);
     }
 
     /**

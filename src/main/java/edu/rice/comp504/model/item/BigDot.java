@@ -11,6 +11,6 @@ public class BigDot extends AItem{
      */
     public BigDot(Point loc) {
         super("bigDot", loc);
-        this.score = 20;
+        this.score = 50;
     }
 }

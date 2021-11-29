@@ -29,6 +29,15 @@ public class Ghost extends ACharacter {
     }
 
     /**
+     * get the name of ghost.
+     * @param name the name of the ghost
+     */
+    public String getName() { //add
+        return this.name; //add
+    }   //add
+
+
+    /**
      * Make a ghost.
      * @param strategy a strategy
      *

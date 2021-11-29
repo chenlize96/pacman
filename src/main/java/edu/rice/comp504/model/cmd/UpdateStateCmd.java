@@ -4,7 +4,12 @@ import edu.rice.comp504.model.PacmanStore;
 import edu.rice.comp504.model.agent.ACharacter;
 import edu.rice.comp504.model.agent.Ghost;
 import edu.rice.comp504.model.agent.Pacman;
+import edu.rice.comp504.model.item.APaintObject;
+import edu.rice.comp504.model.item.BigDot;
+import edu.rice.comp504.model.item.Dot;
+import edu.rice.comp504.model.item.Fruit;
 
+import java.awt.*;
 import java.beans.PropertyChangeListener;
 
 public class UpdateStateCmd implements IPaintObjCmd {
@@ -22,7 +27,7 @@ public class UpdateStateCmd implements IPaintObjCmd {
     }
 
     @Override
-    public void execute(ACharacter context) {
+    public void execute(ACharacter context) {   //add
         //System.out.println("execute");
         if (context instanceof Pacman) {
                 //System.out.println("here");
@@ -30,7 +35,12 @@ public class UpdateStateCmd implements IPaintObjCmd {
                 context.nextLocation();
             }
         } else {
-            ((Ghost)context).getStrategy().updateState(context,context);
+            for (PropertyChangeListener iCharacter : iCharacters) {
+                if (((APaintObject)iCharacter).getType().equals("pacman")) {
+                    ((Ghost)context).getStrategy().updateState(context,((Pacman)iCharacter));
+                    break;
+                }
+            }
         }
 
     }

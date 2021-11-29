@@ -17,6 +17,7 @@ var fruitImg = new Image();
 var brownImg = new Image();
 var woodImg = new Image();
 var redImg = new Image();
+var yellowImg = new Image();
 
 let pacmanDir;
 let pacmanFrame;
@@ -351,7 +352,10 @@ function ghostRender(ghost) {
  */
 function dynamicRender(data) {
     dynamicApp.clear();
-    data.forEach(function(obj) {
+    let dynamics = data.dynamics;
+    let eatenDot = data.eaten;
+    let score = data.score;
+    dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
         if(!obj) {
@@ -370,6 +374,16 @@ function dynamicRender(data) {
                 break;
         }
     });
+
+    eatenDot.forEach(function(obj) {
+        let locX = obj.loc.y * wScale;
+        let locY = obj.loc.x * hScale;
+        app.drawFullImage(floorImg, locX, locY, wScale, hScale);
+    });
+
+    let scoreText = document.getElementById("score_text");
+    scoreText.innerText = "Score: " + score;
+
 }
 
 /**
@@ -403,6 +417,7 @@ function imageInitialize() {
     brownImg.src = "brown.png";
     woodImg.src = "wood.png";
     redImg.src = "red.png";
+    yellowImg.src = "yellow.png";
 }
 
 /**
@@ -461,6 +476,8 @@ function mapRender(map2DArray) {
                 // console.log("Initial pacmanLastLocY: ", pacmanLastLocY);
                 dynamicApp.drawPartImage(pacmanImg, 16, 16, 16, 16,
                     locX, locY, wScale, hScale);
+            } else if (map2DArray[h][w] === 'T') {
+                app.drawFullImage(yellowImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === '1') {
                 redLastLocX = locX;
                 redLastLocY = locY;

@@ -28,8 +28,11 @@ public class GhostStrategyFac implements IStrategyFac{
     @Override
     public IUpdateStrategy make(String strategy) {
         switch (strategy) {
+            case "avoid":   return AvoidStrategy.make();   //add
+            case "random":  return RandomChaseStrategy.make();   //add
+            case "chase":   return ChaseStrategy.make();    //add
             default:
-                return RandomChaseStrategy.make();
+                return ChaseStrategy.make();  //add
         }
     }
 
