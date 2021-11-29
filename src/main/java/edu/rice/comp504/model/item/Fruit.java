@@ -2,24 +2,25 @@ package edu.rice.comp504.model.item;
 
 import java.awt.*;
 
-public class Fruit extends AItem{
+public class Fruit extends AItem {
 
     private int timeLeft;
 
     /**
      * Constructor.
      *
-     * @param loc   The location of the obj on the canvas
+     * @param loc      The location of the obj on the canvas
      * @param timeLeft The time left
      */
-    public Fruit(Point loc, int timeLeft) {
-        super("fruit", loc);
+    public Fruit(Point loc, int timeLeft, String fruitType) {
+        super(fruitType, loc);
         this.timeLeft = timeLeft;
-        this.score = 50;
+        this.score = 100;
     }
 
     /**
      * get the timeLeft.
+     *
      * @return timeLeft.
      */
     public int getTimeLeft() {
@@ -28,6 +29,7 @@ public class Fruit extends AItem{
 
     /**
      * set a new timeLeft.
+     *
      * @param timeLeft timeLeft.
      */
     public void setTimeLeft(int timeLeft) {

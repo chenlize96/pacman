@@ -9,11 +9,15 @@ let ghostRedImg = new Image();
 let ghostPinkImg = new Image();
 let ghostOrangeImg = new Image();
 let ghostCyanImg = new Image();
+let ghostVulBlueImg = new Image();
+let ghostVulWhiteImg = new Image();
+let ghostEyesImg = new Image();
 var pacmanImg = new Image();
 var dotImg = new Image();
 var floorImg = new Image();
 var wallImg = new Image();
-var fruitImg = new Image();
+var strawberryImg = new Image();
+var appleImg = new Image();
 var brownImg = new Image();
 var woodImg = new Image();
 var redImg = new Image();
@@ -55,8 +59,12 @@ let pinkVelX;
 let pinkVelY;
 let pinkDir;
 
+let fruitLocX;
+let fruitLocY;
 
-
+let ghostNum = 3;
+let fruitType = "strawberry";
+let level = "easy";
 
 /**
  * Create the pacman map app for a canvas, it won't be modified during each level.
@@ -255,6 +263,8 @@ function pacmanRender(pacman) {
 function ghostRender(ghost) {
     let imgSx = 0.0;
     let imgSy = 0.0;
+    console.log(ghost);
+
     switch (ghost.name) {
         case "red":
             if (frameTime === framePerInterval) {
@@ -269,10 +279,31 @@ function ghostRender(ghost) {
             // Set up other parameters
             imgSx = 16 * ghostFrame;
             imgSy = 16 * ghost.currDir;
-
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostRedImg, imgSx, imgSy, 16, 16,
-                redLastLocX, redLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
+            else{
+                dynamicApp.drawPartImage(ghostRedImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
             break;
 
         case "pink":
@@ -289,8 +320,30 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostPinkImg, imgSx, imgSy, 16, 16,
-                pinkLastLocX, pinkLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostPinkImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
             break;
 
         case "orange":
@@ -307,8 +360,31 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostOrangeImg, imgSx, imgSy, 16, 16,
-                orangeLastLocX, orangeLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostOrangeImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+
             break;
 
         case "cyan":
@@ -325,8 +401,30 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostCyanImg, imgSx, imgSy, 16, 16,
-                cyanLastLocX, cyanLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostEyesImg, 0, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostCyanImg, imgSx, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
             break;
 
         default:
@@ -353,9 +451,11 @@ function ghostRender(ghost) {
  */
 function dynamicRender(data) {
     dynamicApp.clear();
+    console.log(data);
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
     let score = data.score;
+    let dotNum = 0;
     dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
@@ -379,12 +479,52 @@ function dynamicRender(data) {
     eatenDot.forEach(function(obj) {
         let locX = obj.loc.y * wScale;
         let locY = obj.loc.x * hScale;
+        if(obj.type == "dot") {
+            dotNum++;
+        }
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
 
+    if(data.fruitAppear) {
+       if(fruitType == "strawberry"){
+           app.drawFullImage(strawberryImg, fruitLocX, fruitLocY, wScale, hScale);
+       }
+       else if (fruitType == "apple"){
+           app.drawFullImage(appleImg, fruitLocX, fruitLocY, wScale, hScale);
+       }
+    }
+    else{
+        app.drawFullImage(floorImg, fruitLocX, fruitLocY, wScale, hScale);
+    }
+    if(data.lives !== 3) {
+        if(data.lives === 2) {
+            $("#life_3").hide();
+        }
+        else if(data.lives === 1) {
+            $("#life_2").hide();
+        }
+        else if(data.lives === 0) {
+            $("#life_1").hide();
+            alert("Game Over!");
+            clear();
+        }
+    }
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
+    if(dotNum==240){
+        if(level=="easy"){
+            alert("You finished easy level, now entering hard level!");
+            clear();
+            getHardLevel();
+        }
+        else{
+            alert("You finished hard level, now starting new game!");
+            clear();
+            getEasyLevel()
+        }
+        intervalID = setInterval(updateWorld, 500);
+    }
 }
 
 /**
@@ -410,7 +550,8 @@ function imageInitialize() {
     floorImg.src = "floor.png";
     dotImg.src = "pellet.png";
     pacmanImg.src = "pacman.png";
-    fruitImg.src = "strawberry.png";
+    strawberryImg.src = "strawberry.png";
+    appleImg.src = "apple.png";
     ghostRedImg.src = "ghost_red.png";
     ghostPinkImg.src = "ghost_pink.png";
     ghostOrangeImg.src = "ghost_orange.png";
@@ -419,6 +560,9 @@ function imageInitialize() {
     woodImg.src = "wood.png";
     redImg.src = "red.png";
     yellowImg.src = "yellow.png";
+    ghostVulBlueImg.src = "ghost_vul_blue.png";
+    ghostVulWhiteImg.src = "ghost_vul_white.png";
+    ghostEyesImg.src = "ghost_eyes.png";
     gateImg.src = "gate.png";
 }
 
@@ -459,7 +603,9 @@ function mapRender(map2DArray) {
                 app.drawFullImage(dotImg, locX - wScale / 2, locY - hScale / 2,
                     wScale * 2, hScale * 2);
             } else if (map2DArray[h][w] === 'S') {
-                app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
+                fruitLocX = locX;
+                fruitLocY = locY;
+                //app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'B') {
                 app.drawFullImage(brownImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'b') {
@@ -523,7 +669,7 @@ function mapRender(map2DArray) {
  * Pass along the canvas dimensions
  */
 function canvasDims() {
-    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width}, function (data) {
+    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width, fruitType:fruitType, ghostNum:ghostNum}, function (data) {
         console.log(data);
         mapRender(data);
     }, "json");
@@ -534,15 +680,17 @@ function canvasDims() {
  */
 function getEasyLevel() {
     location.reload();
+    level = "easy";
 }
 
 /**
  * Set the hard level
  */
 function getHardLevel() {
-    $.post("/level", {level: "hard"}, function (data) {
+    $.post("/level", {level: "hard",fruitType:fruitType, ghostNum:ghostNum}, function (data) {
         console.log(data);
         mapRender(data);
+        level = "hard";
     }, "json");
 }
 

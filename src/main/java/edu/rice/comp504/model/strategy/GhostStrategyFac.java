@@ -8,7 +8,7 @@ public class GhostStrategyFac implements IStrategyFac{
     /**
      * Constructor.
      */
-    private GhostStrategyFac() {
+    public GhostStrategyFac() {
 
     }
 

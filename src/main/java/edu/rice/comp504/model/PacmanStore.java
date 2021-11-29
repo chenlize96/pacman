@@ -29,8 +29,14 @@ public class PacmanStore {
     private static List<AItem> eatenItems;
     private static long lastFruitAppearTime;
     private static final long fruitDisappearTime = 5000; //5s
-    private static final long fruitAppearTime = 3000; //3s
+    private static final long fruitAppearTime = 5000; //5s
     private static boolean fruitAppear;
+    private static int currentFrame = -1;
+    private static int numEatenGhost = 0;
+
+    private static final int[] Ghost_Score_List = new int[]{200,400,800,1600};
+    private static final int Dark_Blue_Frames = 100;
+    private static final int Blink_Frames = 50;
 
     /**
      * Constructor.
@@ -44,7 +50,7 @@ public class PacmanStore {
      * Initialize the game.
      * @param info the letter map
      */
-    public void initialize(String[][] info) {
+    public void initialize(String[][] info, int ghostNum, String fruitType) {
         this.info = info;
         score = 0;
         eatenItems = new ArrayList<>();
@@ -73,7 +79,7 @@ public class PacmanStore {
                         obj = new EmptyCell(loc);
                         break;
                     case "S":
-                        obj = new Fruit(loc,1000);
+                        obj = new Fruit(loc,1000,fruitType);
                         break;
                     case "P":
                         obj = new Pacman("pacman", loc, loc, 1); // dir = right
@@ -83,24 +89,40 @@ public class PacmanStore {
                         obj = new TransportCell(loc);
                         break;
                     case "1":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("red");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 1) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("red");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "2":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("pink");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 2) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("pink");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "3":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("orange");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 3) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("orange");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "4":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("cyan");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 4) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("cyan");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     default:
                         obj = null;
@@ -170,16 +192,18 @@ public class PacmanStore {
     public static PropertyChangeListener[] updatePacmanWorld() {
         // update fruit
         long currentTime = System.currentTimeMillis();
+        System.out.println(currentTime+"  "+(lastFruitAppearTime + fruitAppearTime)+" "+(lastFruitAppearTime + fruitAppearTime + fruitDisappearTime));
         if(currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
             setFruitAppear(false);
         } else if(!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime){
+            System.out.println("pass here" + currentTime);
             setFruitAppear(true);
             // TODO: performance issue, 240 dots, acceptable?
             //remove fruit item from eaten items
             Iterator<AItem> iterator = eatenItems.iterator();
             while (iterator.hasNext()) {
                 AItem item = iterator.next();
-                if (item.getType().equals("fruit")) {
+                if (item.getType().equals("strawberry") || item.getType().equals("apple")) {
                     iterator.remove();
                 }
             }
@@ -249,32 +273,129 @@ public class PacmanStore {
     public static void removeTheGhost(PropertyChangeListener wall) {
     }
 
+    /**
+     * isFruitAppear.
+     * @return fruitAppear.
+     */
     public static boolean isFruitAppear() {
         return fruitAppear;
     }
 
+    /**
+     * setFruitAppear.
+     */
     public static void setFruitAppear(boolean fruitAppear) {
         PacmanStore.fruitAppear = fruitAppear;
     }
 
 
+    /**
+     * getScore.
+     * @return score.
+     */
     public static int getScore() {
         return score;
     }
 
+    /**
+     * setScore.
+     */
     public static void setScore(int score) {
         PacmanStore.score = score;
     }
 
+    /**
+     * getEatenItems.
+     * @return eatenItems.
+     */
     public static List<AItem> getEatenItems() {
         return eatenItems;
     }
 
+    /**
+     * getLastFruitAppearTime.
+     * @return lastFruitAppearTime.
+     */
     public long getLastFruitAppearTime() {
         return lastFruitAppearTime;
     }
 
+    /**
+     * setLastFruitAppearTime.
+     * @param lastFruitAppearTime lastFruitAppearTime.
+     */
     public void setLastFruitAppearTime(long lastFruitAppearTime) {
         this.lastFruitAppearTime = lastFruitAppearTime;
+    }
+
+    /**
+     * getCurrentFrame.
+     * @return currentFrame.
+     */
+    public static int getCurrentFrame() {
+        return currentFrame;
+    }
+
+    /**
+     * setCurrentFrame.
+     */
+    public static void setCurrentFrame(int currentFrame) {
+        PacmanStore.currentFrame = currentFrame;
+    }
+
+    /**
+     * getNumEatenGhost.
+     * @return numEatenGhost.
+     */
+    public static int getNumEatenGhost() {
+        return numEatenGhost;
+    }
+
+    /**
+     * setNumEatenGhost.
+     */
+    public static void setNumEatenGhost(int numEatenGhost) {
+        PacmanStore.numEatenGhost = numEatenGhost;
+    }
+
+    /**
+     * getDarkBlueFrames.
+     * @return Dark_Blue_Frames.
+     */
+    public static int getDarkBlueFrames() {
+        return Dark_Blue_Frames;
+    }
+
+    /**
+     * getBlinkFrames.
+     * @return Blink_Frames.
+     */
+    public static int getBlinkFrames() {
+        return Blink_Frames;
+    }
+
+    /**
+     * get ghost score lists.
+     * @return score lists.
+     */
+    public static int[] getGhostScoreList() {
+        return Ghost_Score_List;
+    }
+
+
+    /**
+     * get lives.
+     * @return lives.
+     */
+    public static int getLives() {
+        for (int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                APaintObject object = grid[i][j];
+                if (object.getType().equals("pacman")) {
+                    return ((Pacman)object).getLives();
+                }
+            }
+        }
+        return 0;
     }
 }

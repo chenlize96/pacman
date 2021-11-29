@@ -15,13 +15,16 @@ public class Ghost extends ACharacter {
 
     private IUpdateStrategy movingStrategy;    //the strategy of moving
     private String name;
+    private String ghostStatus; // "normal", "vulnerable_dark_blue", "vulnerable_blink", "dead"
     private boolean fresh;
     private ArrayList<Integer> path = new ArrayList<>();
+
 
     public Ghost(String type, Point loc, Point bornLoc, int currDir) {
         super(type, loc, bornLoc, currDir);
         this.fresh = true; // used to fresh a star algorithm periodically
         movingStrategy = GhostStrategyFac.makeStrategyFactory().make("");
+        ghostStatus = "normal";
     }
 
     /**
@@ -77,7 +80,6 @@ public class Ghost extends ACharacter {
     /**
      * Make a ghost.
      * @param strategy a strategy
-     *
      */
     public static Ghost makeGhost(String strategy)  {
         return null;
@@ -132,4 +134,19 @@ public class Ghost extends ACharacter {
         ((IPaintObjCmd) evt.getNewValue()).execute(this);
     }
 
+    /**
+     * get ghost status.
+     * @return ghost status.
+     */
+    public String getGhostStatus() {
+        return ghostStatus;
+    }
+
+    /**
+     * set ghost status.
+     * @param ghostStatus ghost status.
+     */
+    public void setGhostStatus(String ghostStatus) {
+        this.ghostStatus = ghostStatus;
+    }
 }

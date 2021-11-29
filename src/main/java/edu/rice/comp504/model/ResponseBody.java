@@ -10,12 +10,14 @@ public class ResponseBody {
     private AItem[] eaten;
     private int score;
     private boolean fruitAppear;
+    private int lives;
 
-    public ResponseBody(PropertyChangeListener[] dynamics, AItem[] eaten, int score, boolean fruitAppear) {
+    public ResponseBody(PropertyChangeListener[] dynamics, AItem[] eaten, int score, boolean fruitAppear, int lives) {
         this.dynamics = dynamics;
         this.eaten = eaten;
         this.score = score;
         this.fruitAppear = fruitAppear;
+        this.lives = lives;
     }
 
     public PropertyChangeListener[] getDynamics() {
@@ -48,5 +50,13 @@ public class ResponseBody {
 
     public void setFruitAppear(boolean fruitAppear) {
         this.fruitAppear = fruitAppear;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
