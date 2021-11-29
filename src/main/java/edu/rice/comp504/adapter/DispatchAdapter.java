@@ -50,8 +50,8 @@ public class DispatchAdapter {
      * @param level the file name, named by the level of the game.
      */
     public String[][] initializeLevel(String level, int ghostNum, String fruitType) {
-        String input = LevelStore.getTheLevel(level);
-        row = 0;
+        String[][] grid = LevelStore.getTheLevel(level);
+        /*row = 0;
         col = 0;
         String[] lineSplit = input.split("\n");
         while (row < lineSplit.length) {
@@ -73,9 +73,9 @@ public class DispatchAdapter {
                 grid[row][col] = line[col];
             }
             row++;
-        }
         System.out.println(sum);
-        pacmanStore.initialize(grid,ghostNum,fruitType);
+        }*/
+        pacmanStore.initialize(grid, ghostNum, fruitType);
         return grid;
     }
 

@@ -88,10 +88,6 @@ public class AvoidStrategy implements IUpdateStrategy{
             }
             ghost.setDir(newDir);
     }
-    @Override
-    public void updateState(ACharacter context) {
-
-    }
 
 
     @Override

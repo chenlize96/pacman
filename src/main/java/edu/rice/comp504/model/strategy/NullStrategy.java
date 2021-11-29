@@ -11,10 +11,6 @@ public class NullStrategy implements IUpdateStrategy{
         return "null";
     }
 
-    @Override
-    public void updateState(ACharacter context) {
-
-    }
 
     @Override
     public void updateState(ACharacter pacman, ACharacter context) {

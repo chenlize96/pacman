@@ -6,6 +6,7 @@ import edu.rice.comp504.model.strategy.IUpdateStrategy;
 
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 
 /**
  * The ghost that will be drawn in pacman world.
@@ -15,11 +16,50 @@ public class Ghost extends ACharacter {
     private IUpdateStrategy movingStrategy;    //the strategy of moving
     private String name;
     private String ghostStatus; // "normal", "vulnerable_dark_blue", "vulnerable_blink", "dead"
+    private boolean fresh;
+    private ArrayList<Integer> path = new ArrayList<>();
+
 
     public Ghost(String type, Point loc, Point bornLoc, int currDir) {
         super(type, loc, bornLoc, currDir);
+        this.fresh = true; // used to fresh a star algorithm periodically
         movingStrategy = GhostStrategyFac.makeStrategyFactory().make("");
         ghostStatus = "normal";
+    }
+
+    /**
+     * Set the path of ghost.
+     */
+    public void setPath(ArrayList<Integer> path) {
+        this.path = path;
+    }
+
+    /**
+     * Get the path of ghost.
+     */
+    public ArrayList<Integer> getPath() {
+        return path;
+    }
+
+    /**
+     * Remove the first element of the path.
+     */
+    public void updatePath() {
+        path.remove(0);
+    }
+
+    /**
+     * Set the fresh of ghost.
+     */
+    public void setFresh() {
+        this.fresh = false;
+    }
+
+    /**
+     * Get the fresh of ghost.
+     */
+    public boolean getFresh() {
+        return fresh;
     }
 
     /**
@@ -31,17 +71,15 @@ public class Ghost extends ACharacter {
     }
 
     /**
-     * get the name of ghost.
+     * Get the name of ghost.
      */
     public String getName() { //add
         return this.name; //add
     }   //add
 
-
     /**
      * Make a ghost.
      * @param strategy a strategy
-     *
      */
     public static Ghost makeGhost(String strategy)  {
         return null;

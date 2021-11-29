@@ -12,11 +12,6 @@ public class AmbushStrategy implements IUpdateStrategy{
     }
 
     @Override
-    public void updateState(ACharacter context) {
-
-    }
-
-    @Override
     public void updateState(ACharacter pacman, ACharacter context) {
 
     }

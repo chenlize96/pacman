@@ -11,10 +11,6 @@ public class FickleStrategy implements IUpdateStrategy{
         return "fickle";
     }
 
-    @Override
-    public void updateState(ACharacter context) {
-
-    }
 
     @Override
     public void updateState(ACharacter pacman, ACharacter context) {

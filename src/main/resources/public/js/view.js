@@ -22,6 +22,7 @@ var brownImg = new Image();
 var woodImg = new Image();
 var redImg = new Image();
 var yellowImg = new Image();
+var gateImg = new Image();
 
 let pacmanDir;
 let pacmanFrame;
@@ -562,6 +563,7 @@ function imageInitialize() {
     ghostVulBlueImg.src = "ghost_vul_blue.png";
     ghostVulWhiteImg.src = "ghost_vul_white.png";
     ghostEyesImg.src = "ghost_eyes.png";
+    gateImg.src = "gate.png";
 }
 
 /**
@@ -610,6 +612,8 @@ function mapRender(map2DArray) {
                 app.drawFullImage(woodImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'R') {
                 app.drawFullImage(redImg, locX, locY, wScale, hScale);
+            } else if (map2DArray[h][w] === 'G') {
+                app.drawFullImage(gateImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'E') {
                 //console.log("Empty index, render Nothing...");
             } else if (map2DArray[h][w] === 'P') {
