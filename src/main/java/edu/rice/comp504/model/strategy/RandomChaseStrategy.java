@@ -67,15 +67,6 @@ public class RandomChaseStrategy implements IUpdateStrategy {
         return directionTemp;
     }
 
-    /**
-     * Update a ghost position randomly.
-     */
-    @Override
-    public void updateState(ACharacter context) {
-
-
-
-    }
 
     @Override
     /**

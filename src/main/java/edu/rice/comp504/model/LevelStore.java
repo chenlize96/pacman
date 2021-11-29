@@ -4,36 +4,66 @@ package edu.rice.comp504.model;
  * A store containing the different level.
  */
 public class LevelStore {
-    private static String easy = "W W W W W W W W W W W W W W W W W W W W W W W W W W W W\n" +
-            "W L D D D D D D D D D D D W W D D D D D D D D D D D L W\n" +
-            "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-            "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-            "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-            "W D D D D D D D D D D D D D D D D D D D D D D D D D D W\n" +
-            "W D W W W W D W W D W W W W W W W W D W W D W W W W D W\n" +
-            "W D W W W W D W W D W W W W W W W W D W W D W W W W D W\n" +
-            "W D D D D D D W W D D D D W W D D D D W W D D D D D D W\n" +
-            "W W W W W W D W W W W W D W W D W W W W W D W W W W W W\n" +
-            "W W W W W W D W W W W W E W W E W W W W W D W W W W W W\n" +
-            "W W W W W W D W W E E E E E E E E E E W W D W W W W W W\n" +
-            "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-            "W W W W W W D W W E W E 1 2 3 4 E W E W W D W W W W W W\n" +
-            "T E E S E E D E E E E E E E E E E W E E E D E E E E E T\n" +
-            "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-            "W W W W W W D W W E E E E P E E E E E W W D W W W W W W\n" +
-            "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-            "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-            "W W W W W W D W W E W W W W W W W W E W W D W W W W W W\n" +
-            "W D D D D D D D D D D D D W W D D D D D D D D D D D D W\n" +
-            "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-            "W D W W W W D W W W W W D W W D W W W W W D W W W W D W\n" +
-            "W D D D W W D D D D D D D D D D D D D D D D W W D D D W\n" +
-            "W W W D W W D W W D W W W W W W W W D W W D W W D W W W\n" +
-            "W W W D W W D W W D W W W W W W W W D W W D W W D W W W\n" +
-            "W D D D D D D W W D D D D W W D D D D W W D D D D D D W\n" +
-            "W D W W W W W W W W W W D W W D W W W W W W W W W W D W\n" +
-            "W L D D D D D D D D D D D D D D D D D D D D D D D D L W\n" +
-            "W W W W W W W W W W W W W W W W W W W W W W W W W W W W";
+    private static String[][] easy = {{"W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W",
+            "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W" },
+            {"W", "L", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "D", "D",
+                    "D", "D", "D", "D", "D", "L", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D",
+                    "D", "D", "D", "D", "D", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W", "W", "W", "W", "D", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W", "W", "W", "W", "D", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "D", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "W", "W",
+                    "D", "D", "D", "D", "D", "D", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "E", "W", "W", "E", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "W", "W", "G", "G", "W", "W", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "E", "1", "E", "3", "E", "E", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"T", "E", "E", "S", "E", "E", "D", "E", "E", "E", "W", "E", "E", "2", "E", "4", "E", "W", "E", "E", "E",
+                    "D", "E", "E", "E", "E", "E", "T" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "W", "W", "W", "W", "W", "W", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "W", "W", "W", "W", "W", "W", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "W", "W", "W", "W", "W", "W", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "W", "W", "W", "W", "W", "D", "W", "W", "E", "W", "W", "W", "W", "W", "W", "W", "W", "E", "W", "W",
+                    "D", "W", "W", "W", "W", "W", "W" },
+            {"W", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "D", "D",
+                    "D", "D", "D", "D", "D", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "D", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "D", "W", "W", "W", "W", "D", "W" },
+            {"W", "D", "D", "D", "W", "W", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D",
+                    "D", "W", "W", "D", "D", "D", "W" },
+            {"W", "W", "W", "D", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W", "W", "W", "W", "D", "W", "W",
+                    "D", "W", "W", "D", "W", "W", "W" },
+            {"W", "W", "W", "D", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W", "W", "W", "W", "D", "W", "W",
+                    "D", "W", "W", "D", "W", "W", "W" },
+            {"W", "D", "D", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "W", "W", "D", "D", "D", "D", "W", "W",
+                    "D", "D", "D", "D", "D", "D", "W" },
+            {"W", "D", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "D", "W", "W", "D", "W", "W", "W", "W", "W",
+                    "W", "W", "W", "W", "W", "D", "W" },
+            {"W", "L", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "D", "P", "D", "D", "D", "D", "D",
+                    "D", "D", "D", "D", "D", "L", "W" },
+            {"W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W",
+                    "W", "W", "W", "W", "W", "W", "W" }};
 
     private static String hard = "W W W W W W W W W W W W W W W W W W W W W W W W W W W W\n" +
             "W L D E E E D D D D W D D D W W D D D W D D D E D E L W\n" +
@@ -67,11 +97,11 @@ public class LevelStore {
      * @param level the level
      * @return the string of map
      */
-    public static String getTheLevel(String level) {
+    public static String[][] getTheLevel(String level) {
         if (level.equals("easy")) {
             return easy;
         } else {
-            return hard;
+            return easy;
         }
     }
 

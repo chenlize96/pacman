@@ -11,10 +11,6 @@ public class StupidStrategy implements IUpdateStrategy{
         return "stupid";
     }
 
-    @Override
-    public void updateState(ACharacter context) {
-
-    }
 
     @Override
     public void updateState(ACharacter pacman, ACharacter context) {
