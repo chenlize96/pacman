@@ -485,12 +485,15 @@ function dynamicRender(data) {
     });
 
     if(data.fruitAppear) {
-       if(fruitType=="strawberry"){
+       if(fruitType == "strawberry"){
            app.drawFullImage(strawberryImg, fruitLocX, fruitLocY, wScale, hScale);
        }
-       else{
+       else if (fruitType == "apple"){
            app.drawFullImage(appleImg, fruitLocX, fruitLocY, wScale, hScale);
        }
+    }
+    else{
+        app.drawFullImage(floorImg, fruitLocX, fruitLocY, wScale, hScale);
     }
     if(data.lives !== 3) {
         if(data.lives === 2) {
