@@ -45,7 +45,7 @@ public class LevelStore {
             "W W W W W D W E E W D D D D D B B B b b b b b D W W D W\n" +
             "W D D E D D W E W W D W W W D B b B b b b b b D D D D W\n" +
             "W D W W W D W W W D D W E E D B b b B b b b b D W W D W\n" +
-            "W D W D D D D D D D W W W W D D D S b b b b b D W D D W\n" +
+            "W D W D D D D D D D W W W W D D D E b b b b b D W D D W\n" +
             "W D W D W W W W W D W 1 2 W D W W D E b b b D D W E W W\n" +
             "W D W D E E E E D D W 3 4 W D W W W E D D E D W W D W W\n" +
             "W D W W W D W W W D W E W W D W W W W W W D W W D D W W\n" +

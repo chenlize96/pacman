@@ -49,7 +49,7 @@ public class PacmanStore {
      * Initialize the game.
      * @param info the letter map
      */
-    public void initialize(String[][] info) {
+    public void initialize(String[][] info, int ghostNum, String fruitType) {
         score = 0;
         eatenItems = new ArrayList<>();
         lastFruitAppearTime = System.currentTimeMillis();
@@ -76,7 +76,7 @@ public class PacmanStore {
                         obj = new EmptyCell(loc);
                         break;
                     case "S":
-                        obj = new Fruit(loc,1000);
+                        obj = new Fruit(loc,1000,fruitType);
                         break;
                     case "P":
                         obj = new Pacman("pacman", loc, loc, 1); // dir = right
@@ -86,24 +86,40 @@ public class PacmanStore {
                         obj = new TransportCell(loc);
                         break;
                     case "1":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("red");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 1) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("red");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "2":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("pink");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 2) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("pink");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "3":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("orange");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 3) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("orange");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     case "4":
-                        obj = new Ghost("ghost", loc, loc, 1); // dir = right
-                        ((Ghost) obj).setName("cyan");
-                        addCharacterToStore((PropertyChangeListener) obj);
+                        if (ghostNum >= 4) {
+                            obj = new Ghost("ghost", loc, loc, 1); // dir = right
+                            ((Ghost) obj).setName("cyan");
+                            addCharacterToStore((PropertyChangeListener) obj);
+                        } else {
+                            obj = new EmptyCell(loc);
+                        }
                         break;
                     default:
                         obj = null;
@@ -176,7 +192,7 @@ public class PacmanStore {
             Iterator<AItem> iterator = eatenItems.iterator();
             while (iterator.hasNext()) {
                 AItem item = iterator.next();
-                if (item.getType().equals("fruit")) {
+                if (item.getType().equals("strawberry") || item.getType().equals("apple")) {
                     iterator.remove();
                 }
             }

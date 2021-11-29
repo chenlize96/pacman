@@ -84,7 +84,7 @@ public class InteractCmd implements IPaintObjCmd {
             // all ghosts turn dark-blue for 4 frames, then blink for 4 frames
             // don't need to consider that we eat 2 bigDots in 8 frames, due to the grid size
             setAllGhostVulnerableAndStartTimer();
-        } else if (type.equals("fruit")) {
+        } else if (type.equals("strawberry") || type.equals("apple")) {
             if (PacmanStore.isFruitAppear()) {
                 PacmanStore.setScore(PacmanStore.getScore() + ((Fruit) grid[currLoc.x][currLoc.y]).score);
                 PacmanStore.addEatenItems((Fruit) grid[currLoc.x][currLoc.y]);

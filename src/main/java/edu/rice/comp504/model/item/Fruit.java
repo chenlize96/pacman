@@ -12,8 +12,8 @@ public class Fruit extends AItem {
      * @param loc      The location of the obj on the canvas
      * @param timeLeft The time left
      */
-    public Fruit(Point loc, int timeLeft) {
-        super("fruit", loc);
+    public Fruit(Point loc, int timeLeft, String fruitType) {
+        super(fruitType, loc);
         this.timeLeft = timeLeft;
         this.score = 100;
     }
