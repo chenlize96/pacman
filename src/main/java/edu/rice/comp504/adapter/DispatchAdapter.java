@@ -3,7 +3,11 @@ package edu.rice.comp504.adapter;
 import edu.rice.comp504.model.LevelStore;
 import edu.rice.comp504.model.PacmanStore;
 import edu.rice.comp504.model.ResponseBody;
+import edu.rice.comp504.model.agent.Ghost;
+import edu.rice.comp504.model.agent.Pacman;
 import edu.rice.comp504.model.item.AItem;
+import edu.rice.comp504.model.item.APaintObject;
+import edu.rice.comp504.model.strategy.GhostStrategyFac;
 
 
 import java.awt.*;
@@ -45,7 +49,7 @@ public class DispatchAdapter {
      * initialize the game. (For Dinghua, API Design Section)
      * @param level the file name, named by the level of the game.
      */
-    public String[][] initializeLevel(String level) {
+    public String[][] initializeLevel(String level, int ghostNum, String fruitType) {
         String[][] grid = LevelStore.getTheLevel(level);
         /*row = 0;
         col = 0;
@@ -69,8 +73,9 @@ public class DispatchAdapter {
                 grid[row][col] = line[col];
             }
             row++;
+        System.out.println(sum);
         }*/
-        pacmanStore.initialize(grid);
+        pacmanStore.initialize(grid, ghostNum, fruitType);
         return grid;
     }
 
@@ -90,7 +95,8 @@ public class DispatchAdapter {
         PropertyChangeListener[] dynamics = PacmanStore.updatePacmanWorld();
         AItem[] eaten = new AItem[PacmanStore.getEatenItems().size()];
         PacmanStore.getEatenItems().toArray(eaten);
-        return new ResponseBody(dynamics,eaten,PacmanStore.getScore(),PacmanStore.isFruitAppear());
+        System.out.println("***" + PacmanStore.getLives());
+        return new ResponseBody(dynamics,eaten,PacmanStore.getScore(),PacmanStore.isFruitAppear(),PacmanStore.getLives());
     }
 
     /**

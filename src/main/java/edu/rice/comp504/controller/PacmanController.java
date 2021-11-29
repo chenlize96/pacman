@@ -24,7 +24,10 @@ public class PacmanController {
 
         post("/canvas/dims", (request, response) -> {
             System.out.println("do not delete this line");
-            return gson.toJson(dis.initializeLevel("easy"));
+            // extension for ghost num and fruit type
+            int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
+            String fruitType = request.queryMap().value("fruitType"); // S or A
+            return gson.toJson(dis.initializeLevel("easy",ghostNum,fruitType));
         });
 
         get("/update", (request, response) -> {
@@ -41,7 +44,10 @@ public class PacmanController {
         post("/level", (request, response) -> {
             System.out.println(request.queryMap().value("level"));
             dis.removeAll();
-            return gson.toJson(dis.initializeLevel("hard"));
+            // extension for ghost num and fruit type
+            int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
+            String fruitType = request.queryMap().value("fruitType"); // S or A
+            return gson.toJson(dis.initializeLevel("hard",ghostNum,fruitType));
         });
     }
 
