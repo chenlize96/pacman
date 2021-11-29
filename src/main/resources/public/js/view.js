@@ -475,9 +475,11 @@ function dynamicRender(data) {
         let locY = obj.loc.x * hScale;
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
-    if(data.foodAppear) {
-        app.drawFullImage(floorImg, fruitLocX, fruitLocY, wScale, hScale);
+
+    if(data.fruitAppear) {
+        app.drawFullImage(fruitImg, fruitLocX, fruitLocY, wScale, hScale);
     }
+
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 

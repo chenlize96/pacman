@@ -91,6 +91,7 @@ public class DispatchAdapter {
         PropertyChangeListener[] dynamics = PacmanStore.updatePacmanWorld();
         AItem[] eaten = new AItem[PacmanStore.getEatenItems().size()];
         PacmanStore.getEatenItems().toArray(eaten);
+        System.out.println(PacmanStore.isFruitAppear());
         return new ResponseBody(dynamics,eaten,PacmanStore.getScore(),PacmanStore.isFruitAppear());
     }
 

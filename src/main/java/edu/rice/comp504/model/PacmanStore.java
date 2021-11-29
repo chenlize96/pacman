@@ -28,14 +28,14 @@ public class PacmanStore {
     private static List<AItem> eatenItems;
     private static long lastFruitAppearTime;
     private static final long fruitDisappearTime = 5000; //5s
-    private static final long fruitAppearTime = 3000; //3s
+    private static final long fruitAppearTime = 5000; //5s
     private static boolean fruitAppear;
     private static int currentFrame = -1;
     private static int numEatenGhost = 0;
 
     private static final int[] Ghost_Score_List = new int[]{200,400,800,1600};
-    private static final int Dark_Blue_Frames = 4;
-    private static final int Blink_Frames = 4;
+    private static final int Dark_Blue_Frames = 100;
+    private static final int Blink_Frames = 50;
 
     /**
      * Constructor.
@@ -165,9 +165,11 @@ public class PacmanStore {
     public static PropertyChangeListener[] updatePacmanWorld() {
         // update fruit
         long currentTime = System.currentTimeMillis();
+        System.out.println(currentTime+"  "+(lastFruitAppearTime + fruitAppearTime)+" "+(lastFruitAppearTime + fruitAppearTime + fruitDisappearTime));
         if(currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
             setFruitAppear(false);
         } else if(!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime){
+            System.out.println("pass here" + currentTime);
             setFruitAppear(true);
             // TODO: performance issue, 240 dots, acceptable?
             //remove fruit item from eaten items

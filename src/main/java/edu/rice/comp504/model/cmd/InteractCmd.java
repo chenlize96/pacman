@@ -42,7 +42,7 @@ public class InteractCmd implements IPaintObjCmd {
                     Ghost ghost = collideWithGhost(pacman);
                     ghost.setGhostStatus("dead");
                     // TODO: dead ghost need to return to the home box
-                    ghost.setStrategy(new GhostStrategyFac().make("backHome"));
+                    ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("backHome"));
 
                     PacmanStore.setNumEatenGhost(PacmanStore.getNumEatenGhost() + 1);
                     int[] ghostScoreList = PacmanStore.getGhostScoreList();
@@ -55,12 +55,14 @@ public class InteractCmd implements IPaintObjCmd {
             }
         }
 
-        PacmanStore.setCurrentFrame(PacmanStore.getCurrentFrame() + 1);
-        if (PacmanStore.getCurrentFrame() > PacmanStore.getDarkBlueFrames()) {
+        if (PacmanStore.getCurrentFrame() != -1) {
+            PacmanStore.setCurrentFrame(PacmanStore.getCurrentFrame() + 1);
+        }
+        if (PacmanStore.getCurrentFrame() == PacmanStore.getDarkBlueFrames() + PacmanStore.getBlinkFrames() + 1) {
             // all ghosts set to vulnerable_blink except those dead ones
-            setAllGhostVulnerableBlink();
-        } else if (PacmanStore.getCurrentFrame() == PacmanStore.getDarkBlueFrames() + PacmanStore.getBlinkFrames() + 1) {
             becomeNormal();
+        } else if (PacmanStore.getCurrentFrame() > PacmanStore.getDarkBlueFrames()) {
+            setAllGhostVulnerableBlink();
         }
     }
 
@@ -83,10 +85,11 @@ public class InteractCmd implements IPaintObjCmd {
             // don't need to consider that we eat 2 bigDots in 8 frames, due to the grid size
             setAllGhostVulnerableAndStartTimer();
         } else if (type.equals("fruit")) {
-            PacmanStore.setScore(PacmanStore.getScore() + ((Fruit) grid[currLoc.x][currLoc.y]).score);
-            PacmanStore.addEatenItems((Fruit) grid[currLoc.x][currLoc.y]);
-            grid[currLoc.x][currLoc.y] = new EmptyCell(new Point(currLoc.x, currLoc.y));
-            PacmanStore.setFruitAppear(false);
+            if (PacmanStore.isFruitAppear()) {
+                PacmanStore.setScore(PacmanStore.getScore() + ((Fruit) grid[currLoc.x][currLoc.y]).score);
+                PacmanStore.addEatenItems((Fruit) grid[currLoc.x][currLoc.y]);
+                PacmanStore.setFruitAppear(false);
+            }
         }
     }
 
@@ -98,7 +101,7 @@ public class InteractCmd implements IPaintObjCmd {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
                 ghost.setGhostStatus("vulnerable_dark_blue");
-                ghost.setStrategy(new GhostStrategyFac().make("avoid"));
+                ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
             }
         }
         PacmanStore.setCurrentFrame(0);
@@ -126,7 +129,7 @@ public class InteractCmd implements IPaintObjCmd {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
                 ghost.setGhostStatus("normal");
-                ghost.setStrategy(new GhostStrategyFac().make("chase"));
+                ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
             }
         }
         PacmanStore.setCurrentFrame(-1);

@@ -89,7 +89,7 @@ public abstract class ACharacter extends APaintObject implements PropertyChangeL
                     setLoc(new Point(tempX, 0));
                     return false;
                 }
-                if (allMap[tempX][tempY + 1].getType().equals("wall")) {
+                if (tempY == allMap[0].length - 1 || allMap[tempX][tempY + 1].getType().equals("wall")) {
                     return true;
                 }
                 break;
@@ -107,7 +107,7 @@ public abstract class ACharacter extends APaintObject implements PropertyChangeL
                     setLoc(new Point(tempX, 0));
                     this.setDir(1);
                 }
-                if (allMap[tempX][tempY - 1].getType().equals("wall")) {
+                if (tempY == 0 || allMap[tempX][tempY - 1].getType().equals("wall")) {
                     return true;
                 }
                 break;
