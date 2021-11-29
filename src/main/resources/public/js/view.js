@@ -276,13 +276,19 @@ function ghostRender(ghost) {
             imgSx = 16 * ghostFrame;
             imgSy = 16 * ghost.currDir;
             // Draw the red ghost
-            if(ghost.ghostStatus === "vulnerable_blue") {
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
                 dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
                     redLastLocX, redLastLocY, wScale, hScale);
             }
-            else if(ghost.ghostStatus === "vulnerable_white"){
-                dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
-                    redLastLocX, redLastLocY, wScale, hScale);
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
             }
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
@@ -310,13 +316,19 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            if(ghost.ghostStatus === "vulnerable_blue") {
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
                 dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
                     pinkLastLocX, pinkLastLocY, wScale, hScale);
             }
-            else if(ghost.ghostStatus === "vulnerable_white"){
-                dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
-                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
             }
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
@@ -344,13 +356,19 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            if(ghost.ghostStatus === "vulnerable_blue") {
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
                 dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
                     orangeLastLocX, orangeLastLocY, wScale, hScale);
             }
-            else if(ghost.ghostStatus === "vulnerable_white"){
-                dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
-                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
             }
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
@@ -379,13 +397,19 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            if(ghost.ghostStatus === "vulnerable_blue") {
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
                 dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
                     cyanLastLocX, cyanLastLocY, wScale, hScale);
             }
-            else if(ghost.ghostStatus === "vulnerable_white"){
-                dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
-                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
             }
             else if(ghost.ghostStatus === "dead"){
                 /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
