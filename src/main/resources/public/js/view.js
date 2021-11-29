@@ -60,8 +60,8 @@ let pinkDir;
 let fruitLocX;
 let fruitLocY;
 
-let ghostNum = 4;
-let fruitType = "S";
+let ghostNum = 3;
+let fruitType = "strawberry";
 let level = "easy";
 
 /**
