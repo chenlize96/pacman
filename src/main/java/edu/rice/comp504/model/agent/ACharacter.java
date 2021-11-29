@@ -85,7 +85,7 @@ public abstract class ACharacter extends APaintObject implements PropertyChangeL
                 }
                 break;
             case 1:
-                if (tempY + 1 > PacmanStore.getGrid()[0].length - 1) {
+                if (this.getType().equals("pacman") && tempY + 1 > PacmanStore.getGrid()[0].length - 1) {   //add
                     setLoc(new Point(tempX, 0));
                     return false;
                 }
@@ -99,7 +99,7 @@ public abstract class ACharacter extends APaintObject implements PropertyChangeL
                 }
                 break;
             case 3:
-                if (tempY - 1 < 0) {
+                if (this.getType().equals("pacman") && tempY - 1 < 0) {   //add
                     setLoc(new Point(tempX, PacmanStore.getGrid()[0].length - 1));
                     return false;
                 }
