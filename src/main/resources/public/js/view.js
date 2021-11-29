@@ -447,6 +447,7 @@ function ghostRender(ghost) {
  */
 function dynamicRender(data) {
     dynamicApp.clear();
+    console.log(data);
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
     let score = data.score;
@@ -479,7 +480,19 @@ function dynamicRender(data) {
     if(data.fruitAppear) {
         app.drawFullImage(fruitImg, fruitLocX, fruitLocY, wScale, hScale);
     }
-
+    if(data.lives !== 3) {
+        if(data.lives === 2) {
+            $("#life_3").hide();
+        }
+        else if(data.lives === 1) {
+            $("#life_2").hide();
+        }
+        else if(data.lives === 0) {
+            $("#life_1").hide();
+            alert("Game Over!");
+            clear();
+        }
+    }
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
