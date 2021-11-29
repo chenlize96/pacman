@@ -352,7 +352,8 @@ function ghostRender(ghost) {
  */
 function dynamicRender(data) {
     dynamicApp.clear();
-    data.forEach(function(obj) {
+    let dynamics = data.dynamics;
+    dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
         if(!obj) {
