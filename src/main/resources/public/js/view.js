@@ -354,6 +354,7 @@ function dynamicRender(data) {
     dynamicApp.clear();
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
+    let score = data.score;
     dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
@@ -379,6 +380,10 @@ function dynamicRender(data) {
         let locY = obj.loc.x * hScale;
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
+
+    let scoreText = document.getElementById("score_text");
+    scoreText.innerText = "Score: " + score;
+
 }
 
 /**
