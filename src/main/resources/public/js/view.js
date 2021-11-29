@@ -9,6 +9,9 @@ let ghostRedImg = new Image();
 let ghostPinkImg = new Image();
 let ghostOrangeImg = new Image();
 let ghostCyanImg = new Image();
+let ghostVulBlueImg = new Image();
+let ghostVulWhiteImg = new Image();
+let ghostEyesImg = new Image();
 var pacmanImg = new Image();
 var dotImg = new Image();
 var floorImg = new Image();
@@ -54,6 +57,8 @@ let pinkVelX;
 let pinkVelY;
 let pinkDir;
 
+let fruitLocX;
+let fruitLocY;
 
 
 
@@ -254,6 +259,8 @@ function pacmanRender(pacman) {
 function ghostRender(ghost) {
     let imgSx = 0.0;
     let imgSy = 0.0;
+    console.log(ghost);
+
     switch (ghost.name) {
         case "red":
             if (frameTime === framePerInterval) {
@@ -268,10 +275,31 @@ function ghostRender(ghost) {
             // Set up other parameters
             imgSx = 16 * ghostFrame;
             imgSy = 16 * ghost.currDir;
-
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostRedImg, imgSx, imgSy, 16, 16,
-                redLastLocX, redLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        redLastLocX, redLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
+            else{
+                dynamicApp.drawPartImage(ghostRedImg, imgSx, imgSy, 16, 16,
+                    redLastLocX, redLastLocY, wScale, hScale);
+            }
             break;
 
         case "pink":
@@ -288,8 +316,30 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostPinkImg, imgSx, imgSy, 16, 16,
-                pinkLastLocX, pinkLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        pinkLastLocX, pinkLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostPinkImg, imgSx, imgSy, 16, 16,
+                    pinkLastLocX, pinkLastLocY, wScale, hScale);
+            }
             break;
 
         case "orange":
@@ -306,8 +356,31 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostOrangeImg, imgSx, imgSy, 16, 16,
-                orangeLastLocX, orangeLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        orangeLastLocX, orangeLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostOrangeImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);
+            }
+
             break;
 
         case "cyan":
@@ -324,8 +397,30 @@ function ghostRender(ghost) {
             imgSy = 16 * ghost.currDir;
 
             // Draw the red ghost
-            dynamicApp.drawPartImage(ghostCyanImg, imgSx, imgSy, 16, 16,
-                cyanLastLocX, cyanLastLocY, wScale, hScale);
+            if(ghost.ghostStatus === "vulnerable_dark_blue") {
+                dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
+            else if(ghost.ghostStatus === "vulnerable_blink"){
+                if(ghostFrame === 1) {
+                    dynamicApp.drawPartImage(ghostVulWhiteImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
+                else {
+                    dynamicApp.drawPartImage(ghostVulBlueImg, imgSx, imgSy, 16, 16,
+                        cyanLastLocX, cyanLastLocY, wScale, hScale);
+                }
+            }
+            else if(ghost.ghostStatus === "dead"){
+                /*dynamicApp.drawPartImage(ghostEyesImg, imgSx, imgSy, 16, 16,
+                    orangeLastLocX, orangeLastLocY, wScale, hScale);*/
+                dynamicApp.drawPartImage(ghostRedImg, 0, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
+            else {
+                dynamicApp.drawPartImage(ghostCyanImg, imgSx, imgSy, 16, 16,
+                    cyanLastLocX, cyanLastLocY, wScale, hScale);
+            }
             break;
 
         default:
@@ -380,7 +475,9 @@ function dynamicRender(data) {
         let locY = obj.loc.x * hScale;
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
-
+    if(data.foodAppear) {
+        app.drawFullImage(floorImg, fruitLocX, fruitLocY, wScale, hScale);
+    }
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
@@ -418,6 +515,9 @@ function imageInitialize() {
     woodImg.src = "wood.png";
     redImg.src = "red.png";
     yellowImg.src = "yellow.png";
+    ghostVulBlueImg.src = "ghost_vul_blue.png";
+    ghostVulWhiteImg.src = "ghost_vul_white.png";
+    ghostEyesImg.src = "ghost_eyes.png";
 }
 
 /**
@@ -457,6 +557,8 @@ function mapRender(map2DArray) {
                 app.drawFullImage(dotImg, locX - wScale / 2, locY - hScale / 2,
                     wScale * 2, hScale * 2);
             } else if (map2DArray[h][w] === 'S') {
+                fruitLocX = locX;
+                fruitLocY = locY;
                 app.drawFullImage(fruitImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'B') {
                 app.drawFullImage(brownImg, locX, locY, wScale, hScale);
