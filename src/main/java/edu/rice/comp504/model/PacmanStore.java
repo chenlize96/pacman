@@ -102,36 +102,42 @@ public class PacmanStore {
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "2":
-                        if (ghostNum >= 4) {
+                        if (ghostNum >= 2) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "3":
                         if (ghostNum >= 3) {
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("orange");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("stupid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "4":
-                        if (ghostNum >= 2) {
+                        if (ghostNum >= 4) {
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("cyan");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     default:
@@ -284,6 +290,8 @@ public class PacmanStore {
      */
     public static void addCharacterToStore(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener("theClock", pcl);
+        System.out.println(pcl);
+        System.out.println(1);
     }
 
     /**

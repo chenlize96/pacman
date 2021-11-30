@@ -21,10 +21,17 @@
     .item4 {
         grid-area: buttons;
     }
+    .item5 {
+        grid-area: ghost;
+    }
+    .item6 {
+        grid-area: fruit;
+    }
     .container {
         display: grid;
         grid-template-areas:
-                'lives score buttons'
+                'lives . score'
+                'ghost fruit buttons'
                 'canvas canvas canvas';
         grid-gap: 10px;
         /*background-color: lightskyblue;*/
@@ -55,6 +62,20 @@
         </div>
         <div class="item2" id="score_text">
             Score: 0
+        </div>
+        <div class="item5">
+            <label for="ghost">ghostNum</label><select id="ghost" style="height: 30px">
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+        </div>
+        <div class="item6">
+            <label for="fruit">fruitType</label><select id="fruit" style="height: 30px">
+            <option value="strawberry">strawberry</option>
+            <option value="apple">apple</option>
+        </select>
         </div>
         <div class="item4">
             Level:

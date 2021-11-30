@@ -179,6 +179,8 @@ public class InteractCmd implements IPaintObjCmd {
                 Pacman pacman = (Pacman) character;
                 int lives = pacman.getLives();
                 pacman.setLives(lives - 1); //todo check if pacman has lives, 0 live alert and refresh game.
+            } else {
+                ((Ghost)character).resetBornStrategy();
             }
             Point point = character.getBornLoc();
             ((ACharacter) pcl).setLoc(point);

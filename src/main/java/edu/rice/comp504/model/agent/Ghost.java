@@ -1,6 +1,7 @@
 package edu.rice.comp504.model.agent;
 
 import edu.rice.comp504.model.cmd.IPaintObjCmd;
+import edu.rice.comp504.model.strategy.AStarAlgorithm;
 import edu.rice.comp504.model.strategy.GhostStrategyFac;
 import edu.rice.comp504.model.strategy.IUpdateStrategy;
 
@@ -20,6 +21,7 @@ public class Ghost extends ACharacter {
     private boolean fresh;
     private ArrayList<Integer> path = new ArrayList<>();
     private ArrayList<Integer> deathPath = new ArrayList<>();
+    private int step = 0;
 
     /**
      * Constructor for ghost.
@@ -135,9 +137,18 @@ public class Ghost extends ACharacter {
     }
 
     /**
+     * Get the current step of ghost.
+     * @return the number
+     */
+    public int getStep() {
+        return step;
+    }
+
+    /**
      * Compute the next location of the paint in the paint world given the velocity.
      */
     public void nextLocation() {
+        step++;
         Point temp = getLoc();
         int tempX = temp.x;
         int tempY = temp.y;
@@ -190,5 +201,7 @@ public class Ghost extends ACharacter {
      */
     public void resetBornStrategy() {
         this.movingStrategy = bornStrategy;
+        step = 0;
+        this.path = AStarAlgorithm.aStarSearch(this.getLoc(), new Point(1, 1));
     }
 }

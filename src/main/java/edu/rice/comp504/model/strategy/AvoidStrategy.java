@@ -106,6 +106,12 @@ public class AvoidStrategy implements IUpdateStrategy {
         Ghost ghost = (Ghost) context;
         Pacman pacman = (Pacman) context2;
         Point target = pacman.getLoc();   //the pacman loction
+        if (ghost.getStep() < 10) {
+            ghost.setPath(AStarAlgorithm.aStarSearch(ghost.getLoc(), pacman.getLoc()));
+            ghost.setDir(ghost.getPath().get(0));
+            ghost.nextLocation();
+            return;
+        }
         int nextDir = -1;                  //next direction
         int maxDistance = 0;              //the max distance for next jump
         int currDistance = 0;             //current checking direction's distance from the pacment to ghost
