@@ -96,8 +96,6 @@ public class PacmanStore {
                         break;
                     case "1":
                         if (ghostNum >= 1) {
-
-
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("red");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
@@ -109,7 +107,6 @@ public class PacmanStore {
                         break;
                     case "2":
                         if (ghostNum >= 2) {
-
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
@@ -293,6 +290,8 @@ public class PacmanStore {
      */
     public static void addCharacterToStore(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener("theClock", pcl);
+        System.out.println(pcl);
+        System.out.println(1);
     }
 
     /**
