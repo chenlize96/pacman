@@ -26,7 +26,7 @@ public class PacmanStore {
     private static APaintObject[][] grid;
     private static String[][] info;
     private static int score;
-    private static List<AItem> eatenItems;
+    private static List<AItem> eatenItems = new ArrayList<>();;
     private static long lastFruitAppearTime;
     private static final long fruitDisappearTime = 5000; //5s
     private static final long fruitAppearTime = 5000; //5s
@@ -52,6 +52,7 @@ public class PacmanStore {
      * @param info the letter map
      */
     public void initialize(String[][] info, int ghostNum, String fruitType) {
+        numDots = 0;
         this.info = info;
         score = 0;
         eatenItems = new ArrayList<>();
