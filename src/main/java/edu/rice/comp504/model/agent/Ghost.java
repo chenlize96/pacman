@@ -32,7 +32,7 @@ public class Ghost extends ACharacter {
      * Set the death path of ghost.
      */
     public void setDeathPath(ArrayList<Integer> path) {
-        this.deathPath = deathPath;
+        this.deathPath = path;
     }
 
     /**
@@ -59,8 +59,12 @@ public class Ghost extends ACharacter {
     /**
      * Remove the first element of the path.
      */
-    public void updatePath() {
-        path.remove(0);
+    public void updatePath(String pathName) {
+        if (pathName.equals("path")) {
+            path.remove(0);
+        } else {
+            deathPath.remove(0);
+        }
     }
 
     /**
