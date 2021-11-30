@@ -33,6 +33,7 @@ public class PacmanStore {
     private static boolean fruitAppear;
     private static int currentFrame = -1;
     private static int numEatenGhost = 0;
+    private static int numDots = 0;
 
     private static final int[] Ghost_Score_List = new int[]{200,400,800,1600};
     private static final int Dark_Blue_Frames = 100;
@@ -71,9 +72,11 @@ public class PacmanStore {
                         break;
                     case "D":
                         obj = new Dot(loc);
+                        numDots++;
                         break;
                     case "L":
                         obj = new BigDot(loc);
+                        numDots++;
                         break;
                     case "E":
                         obj = new EmptyCell(loc);
@@ -99,7 +102,7 @@ public class PacmanStore {
                         }
                         break;
                     case "2":
-                        if (ghostNum >= 2) {
+                        if (ghostNum >= 4) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
@@ -119,10 +122,10 @@ public class PacmanStore {
                         }
                         break;
                     case "4":
-                        if (ghostNum >= 4) {
+                        if (ghostNum >= 2) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("cyan");
-                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("random"));
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -135,6 +138,15 @@ public class PacmanStore {
                 grid[row][col] = obj;
             }
         }
+        System.out.println("the total dots = " + numDots);
+    }
+
+    /**
+     * Get the number of dots.
+     * @return the number of dots
+     */
+    public static int getNumDots() {
+        return numDots;
     }
 
     /**

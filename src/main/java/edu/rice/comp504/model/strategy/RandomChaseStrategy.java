@@ -79,8 +79,8 @@ public class RandomChaseStrategy implements IUpdateStrategy {
         //System.out.println(context.detectCollisionWithWalls(PacmanStore.getGrid()));
         if (context.detectCollisionWithWalls(PacmanStore.getGrid())) {
             dirTemp = availableDirHelper(ghost.getLoc());
-            System.out.println(context.getLoc());
-            System.out.println(dirTemp[0] + " " + dirTemp[1] + " " + dirTemp[2] + " " + dirTemp[3]);
+            //System.out.println(context.getLoc());
+            //System.out.println(dirTemp[0] + " " + dirTemp[1] + " " + dirTemp[2] + " " + dirTemp[3]);
             int l = 0;
             Random r = new Random();
             for (int i = 0 ; i < 4 ; i++) {
@@ -89,7 +89,7 @@ public class RandomChaseStrategy implements IUpdateStrategy {
                 }
             }
             int newDirTemp = (int) (Math.random() * (l + 1));
-            System.out.println(newDirTemp);
+            //System.out.println(newDirTemp);
             int newDir = 0;
             for (int i = 0 ; i < 4 ; i++) {
                 if (newDirTemp == 1 && dirTemp[i] == 1) {

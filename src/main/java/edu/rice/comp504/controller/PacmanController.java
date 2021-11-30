@@ -31,7 +31,7 @@ public class PacmanController {
         });
 
         get("/update", (request, response) -> {
-            System.out.println(request.queryMap().value("pacmanDirection"));
+            //System.out.println(request.queryMap().value("pacmanDirection"));
             dis.setPacmanDir(Integer.parseInt(request.queryMap().value("pacmanDirection")));
             return gson.toJson(dis.updatePacmanWorld());
         });
@@ -42,7 +42,7 @@ public class PacmanController {
         });
 
         post("/level", (request, response) -> {
-            System.out.println(request.queryMap().value("level"));
+            //System.out.println(request.queryMap().value("level"));
             dis.removeAll();
             // extension for ghost num and fruit type
             int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
