@@ -25,10 +25,10 @@ public class AmbushStrategyTest extends TestCase {
         Point test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
         test2 = new Pacman("pacman", new Point(1,1), new Point(1,1), 3);
         test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
-        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 2);
-        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
-        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 1);
-        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
+//        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 2);
+//        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
+//        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 1);
+//        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
     }
 
     public void testUpdateState() {
