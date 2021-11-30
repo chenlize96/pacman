@@ -2,10 +2,12 @@ package edu.rice.comp504.model.agent;
 
 import edu.rice.comp504.model.cmd.UpdateStateCmd;
 import edu.rice.comp504.model.strategy.GhostStrategyFac;
+import edu.rice.comp504.model.strategy.IUpdateStrategy;
 import org.junit.Test;
 
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +27,7 @@ public class GhostTest {
 
     @Test
     public void makeGhost() {
+        assertEquals(null,Ghost.makeGhost("null"));
     }
 
     @Test
@@ -65,4 +68,42 @@ public class GhostTest {
         test.setGhostStatus("dead");
         assertEquals(test.getGhostStatus(), "dead");
     }
+
+    @Test
+    public void setDeathPath() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        test.setDeathPath(list);
+        assertEquals(list,test.getDeathPath());
+    }
+
+    @Test
+    public void setFresh() {
+        test.setFresh();
+        assertEquals(false,test.getFresh());
+    }
+
+    @Test
+    public void resetBornStrategy() {
+        IUpdateStrategy strategy = test.getStrategy();
+        test.resetBornStrategy();
+        assertEquals(strategy,test.getStrategy());
+    }
+
+    @Test
+    public void updatePath() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        test.setPath(list);
+        test.setDeathPath(list);
+
+        test.updatePath("path");
+        test.updatePath("death");
+
+        assertEquals(new ArrayList<>(),test.getDeathPath());
+        assertEquals(new ArrayList<>(),test.getPath());
+    }
+
 }
