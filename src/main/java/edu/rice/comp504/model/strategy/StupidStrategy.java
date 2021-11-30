@@ -48,7 +48,7 @@ public class StupidStrategy implements IUpdateStrategy{
             ;
         } else {
             ghost.setDir(path.get(0));
-            ghost.updatePath();
+            ghost.updatePath("path");
         }
         ghost.nextLocation();
     }

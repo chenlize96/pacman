@@ -29,14 +29,19 @@ public class DeathStrategy implements IUpdateStrategy {
     public void updateState(ACharacter context, ACharacter context2) {
         Ghost ghost = (Ghost) context;
         if (ghost.getDeathPath() == null || ghost.getDeathPath().isEmpty()) {
-            ghost.setPath(AStarAlgorithm.aStarSearch(ghost.getLoc(), ghost.getBornLoc()));
+            System.out.println("******************");
+            System.out.println(ghost.getLoc());
+            System.out.println(ghost.getBornLoc());
+            System.out.println("******************");
+            ghost.setDeathPath(AStarAlgorithm.aStarSearch(ghost.getLoc(), ghost.getBornLoc()));
         }
         ArrayList<Integer> path = ghost.getDeathPath();
+        System.out.println(path.toString());
         if (path == null || path.isEmpty()) {
             ;
         } else {
             ghost.setDir(path.get(0));
-            ghost.updatePath();
+            ghost.updatePath("deathPath");
         }
         ghost.nextLocation();
     }

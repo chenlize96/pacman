@@ -98,18 +98,18 @@ public class AmbushStrategy implements IUpdateStrategy{
 
     @Override
     public void updateState(ACharacter context, ACharacter context2) {
-        System.out.println("********************************");
-        System.out.println("********************************");
-        System.out.println("********************************");
+        //System.out.println("********************************");
+        //System.out.println("********************************");
+        //System.out.println("********************************");
         Ghost ghost = (Ghost) context;
         Pacman pacman = (Pacman) context2;
         if (ghost.getFresh() || AStarAlgorithm.ifNode(ghost.getLoc().x, ghost.getLoc().y)) {
-            System.out.println("(" + pacman.getLoc().x + ", " + pacman.getLoc().y + ")");
+            //System.out.println("(" + pacman.getLoc().x + ", " + pacman.getLoc().y + ")");
             Point temp = fixedMarginLoc(pacman);
-            System.out.println("(" + temp.x + ", " + temp.y + ")");
-            System.out.println("********************************");
-            System.out.println("********************************");
-            System.out.println("********************************");
+            //System.out.println("(" + temp.x + ", " + temp.y + ")");
+            //System.out.println("********************************");
+            //System.out.println("********************************");
+            //System.out.println("********************************");
             ghost.setPath(AStarAlgorithm.aStarSearch(ghost.getLoc(), fixedMarginLoc(pacman)));
             ghost.setFresh();
         }
@@ -118,7 +118,7 @@ public class AmbushStrategy implements IUpdateStrategy{
             ;
         } else {
             ghost.setDir(path.get(0));
-            ghost.updatePath();
+            ghost.updatePath("path");
         }
         ghost.nextLocation();
     }
