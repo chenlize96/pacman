@@ -108,6 +108,9 @@ public class AvoidStrategy implements IUpdateStrategy {
         Point target = pacman.getLoc();   //the pacman loction
         if (ghost.getStep() < 10) {
             ghost.setPath(AStarAlgorithm.aStarSearch(ghost.getLoc(), pacman.getLoc()));
+            if (ghost.getPath() == null) {
+                return;
+            }
             ghost.setDir(ghost.getPath().get(0));
             ghost.nextLocation();
             return;
