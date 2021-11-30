@@ -36,7 +36,7 @@ public class AmbushStrategy implements IUpdateStrategy {
      *
      * @return a new point
      */
-    private Point fixedMarginLoc(Pacman pacman) {
+    public Point fixedMarginLoc(Pacman pacman) {
         String[][] grid = PacmanStore.getLetterGrid();
         int dir = pacman.getDir();
         Point cur = pacman.getLoc();
