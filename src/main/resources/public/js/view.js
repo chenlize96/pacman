@@ -124,7 +124,15 @@ window.onload = function() {
     imageInitialize();
     gameParamInit();
     //canvasDims();
-    setTimeout(() => {canvasDims();} , 300);
+    $("#fruit").change(function () {
+        console.log($(this).val());
+        fruitType = $(this).val();
+    });
+    $("#ghost").change(function () {
+        console.log($(this).val());
+        ghostNum = $(this).val();
+    });
+    //setTimeout(() => {canvasDims();} , 300);
     clearInterval(intervalID);
     clearInterval(frameInterval);
 
@@ -191,7 +199,7 @@ window.onload = function() {
         }**/
         console.log("after direction is: " ,pacmanDir);
     });
-    intervalID = setInterval(updateWorld, 500);
+    //intervalID = setInterval(updateWorld, 500);
 };
 
 /**
@@ -542,7 +550,7 @@ function dynamicRender(data) {
             clear();
             getEasyLevel()
         }
-        intervalID = setInterval(updateWorld, 500);
+        //intervalID = setInterval(updateWorld, 500);
     }
 }
 
@@ -690,7 +698,7 @@ function mapRender(map2DArray) {
  * Pass along the canvas dimensions
  */
 function canvasDims() {
-    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width, fruitType:fruitType, ghostNum:ghostNum}, function (data) {
+    $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width, fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
         console.log(data);
         mapRender(data);
     }, "json");
@@ -700,17 +708,31 @@ function canvasDims() {
  * Set the easy level
  */
 function getEasyLevel() {
-    location.reload();
+    //location.reload();
+    clear();
     level = "easy";
+    canvasDims();
+    //canvasDims();
+    clearInterval(intervalID);
+    clearInterval(frameInterval);
+    intervalID = -1;
+    frameInterval = -1;
+    intervalID = setInterval(updateWorld, 500);
 }
 
 /**
  * Set the hard level
  */
 function getHardLevel() {
-    $.post("/level", {level: "hard",fruitType:fruitType, ghostNum:ghostNum}, function (data) {
+    $.post("/level", {level: "hard",fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
         console.log(data);
+        clear();
         mapRender(data);
+        clearInterval(intervalID);
+        clearInterval(frameInterval);
+        intervalID = -1;
+        frameInterval = -1;
+        intervalID = setInterval(updateWorld, 500);
         level = "hard";
     }, "json");
 }

@@ -96,42 +96,51 @@ public class PacmanStore {
                         break;
                     case "1":
                         if (ghostNum >= 1) {
+
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("red");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "2":
-                        if (ghostNum >= 4) {
+                        if (ghostNum >= 2) {
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "3":
                         if (ghostNum >= 3) {
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("orange");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("stupid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     case "4":
-                        if (ghostNum >= 2) {
+                        if (ghostNum >= 4) {
+
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("cyan");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
+                            info[row][col] = "E";
                         }
                         break;
                     default:
