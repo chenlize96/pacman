@@ -15,8 +15,8 @@ public interface IUpdateStrategy {
 
     /**
      * Update the position of the ghosts.
-     * @param ghost The ghost
-     * @param ghost The pacman
+     * @param context The ghost
+     * @param context2 The pacman
      */
-    void updateState(ACharacter ghost, ACharacter pacman);
+    void updateState(ACharacter context, ACharacter context2);
 }
