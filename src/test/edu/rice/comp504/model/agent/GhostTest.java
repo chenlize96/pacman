@@ -15,6 +15,7 @@ public class GhostTest {
     public void setName() {
         test.setName("test");
         assertEquals(test.getName(), "test");
+        Ghost test2 = new Ghost("ghost", new Point(1,1), new Point(1,1), 0);
     }
 
     @Test

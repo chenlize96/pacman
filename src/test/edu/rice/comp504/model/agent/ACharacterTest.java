@@ -13,6 +13,7 @@ public class ACharacterTest {
     public void testGetBornLoc() {
         Point testPot = test.getBornLoc();
         assertEquals(testPot, new Point(1,1));
+        ACharacter test2 = new Ghost("ghost", new Point(1,1), new Point(1,1), 0);
     }
 
     @Test

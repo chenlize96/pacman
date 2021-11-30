@@ -17,6 +17,7 @@ public class PacmanTest {
     @Test
     public void getLives() {
         assertEquals(test.getLives(), 3);
+        Pacman test2 = new Pacman("pacman", new Point(1,1), new Point(1,1), 0);
     }
 
     @Test
