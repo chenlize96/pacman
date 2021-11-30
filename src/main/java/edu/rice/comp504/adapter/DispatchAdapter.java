@@ -95,7 +95,7 @@ public class DispatchAdapter {
         PropertyChangeListener[] dynamics = PacmanStore.updatePacmanWorld();
         AItem[] eaten = new AItem[PacmanStore.getEatenItems().size()];
         PacmanStore.getEatenItems().toArray(eaten);
-        int num = 5;//PacmanStore.getNumDots();
+        int num = PacmanStore.getNumDots();
         System.out.println(1);
         System.out.println(dynamics.length);
         return new ResponseBody(dynamics,eaten, PacmanStore.getScore(),

@@ -710,6 +710,7 @@ function canvasDims() {
 function getEasyLevel() {
     //location.reload();
     clear();
+    bigDotLocs = [];
     level = "easy";
     canvasDims();
     //canvasDims();
@@ -725,6 +726,7 @@ function getEasyLevel() {
  */
 function getHardLevel() {
     clear();
+    bigDotLocs = [];
     $.post("/level", {level: "hard",fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
         console.log(data);
 
