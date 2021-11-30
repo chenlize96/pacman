@@ -74,8 +74,8 @@ public class AStarAlgorithm {
         Data current;
         while (!frontier.isEmpty()) {
             current = frontier.poll();
-            System.out.println("("+current.point.x +", "+ current.point.y+") " + current.cost + " path = "+
-                    current.path.toString());
+            //System.out.println("("+current.point.x +", "+ current.point.y+") " + current.cost + " path = "+
+            //        current.path.toString());
             if (!visited.contains(current.point) ){
                 visited.add(current.point);
                 if (current.point.equals(end)) {
@@ -182,7 +182,7 @@ public class AStarAlgorithm {
      * @param cur the current point
      * @return boolean
      */
-    private static boolean ifNeighbor(String cur) {
+    public static boolean ifNeighbor(String cur) {
         switch (cur) {
             case "W":
             case "B":
@@ -200,7 +200,7 @@ public class AStarAlgorithm {
      * @param goal the target point
      * @return the heuristic value
      */
-    private static int manhattanHeuristic(Point cur, Point goal) {
+    public static int manhattanHeuristic(Point cur, Point goal) {
         return Math.abs(cur.x - goal.x) + Math.abs(cur.y - goal.y);
     }
 }

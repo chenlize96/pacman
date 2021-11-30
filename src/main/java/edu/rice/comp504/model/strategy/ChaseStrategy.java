@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ChaseStrategy  implements IUpdateStrategy{
 
     private static IUpdateStrategy singleton;
+
     /**
      * Make the only random chase strategy.
      *

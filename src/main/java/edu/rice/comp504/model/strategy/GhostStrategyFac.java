@@ -32,8 +32,10 @@ public class GhostStrategyFac implements IStrategyFac{
             case "random":  return RandomChaseStrategy.make();   //add
             case "chase":   return ChaseStrategy.make();    //add
             case "death": return DeathStrategy.make();
+            case "ambush": return AmbushStrategy.make();
+            case "stupid": return StupidStrategy.make();
             default:
-                return ChaseStrategy.make();  //add
+                return NullStrategy.make();  //add
         }
     }
 

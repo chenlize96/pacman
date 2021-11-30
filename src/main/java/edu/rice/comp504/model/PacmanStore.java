@@ -92,6 +92,7 @@ public class PacmanStore {
                         if (ghostNum >= 1) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("red");
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -101,6 +102,7 @@ public class PacmanStore {
                         if (ghostNum >= 2) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -110,6 +112,7 @@ public class PacmanStore {
                         if (ghostNum >= 3) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("orange");
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("stupid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -119,6 +122,7 @@ public class PacmanStore {
                         if (ghostNum >= 4) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("cyan");
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("random"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -192,11 +196,11 @@ public class PacmanStore {
     public static PropertyChangeListener[] updatePacmanWorld() {
         // update fruit
         long currentTime = System.currentTimeMillis();
-        System.out.println(currentTime+"  "+(lastFruitAppearTime + fruitAppearTime)+" "+(lastFruitAppearTime + fruitAppearTime + fruitDisappearTime));
+        //System.out.println(currentTime+"  "+(lastFruitAppearTime + fruitAppearTime)+" "+(lastFruitAppearTime + fruitAppearTime + fruitDisappearTime));
         if(currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
             setFruitAppear(false);
         } else if(!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime){
-            System.out.println("pass here" + currentTime);
+            //System.out.println("pass here" + currentTime);
             setFruitAppear(true);
             // TODO: performance issue, 240 dots, acceptable?
             //remove fruit item from eaten items
