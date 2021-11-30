@@ -131,7 +131,8 @@ public class InteractCmd implements IPaintObjCmd {
                 Ghost ghost = (Ghost) pcl;
                 if(!ghost.getGhostStatus().equals("dead")){
                     ghost.setGhostStatus("normal");
-                    ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
+                    ghost.resetBornStrategy();
+                    //ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
                 }
             }
         }
@@ -189,7 +190,8 @@ public class InteractCmd implements IPaintObjCmd {
                 Ghost ghost = (Ghost) pcl;
                 if(ghost.getGhostStatus().equals("dead")&& ghost.getLoc().equals(ghost.getBornLoc())){
                     ghost.setGhostStatus("normal");
-                    ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
+                    ghost.resetBornStrategy();
+                    //ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
                 }
             }
         }
