@@ -160,15 +160,17 @@ public class AStarAlgorithm {
     private static Set<Object[]> getNeighbors(String[][] grid, int x, int y) {
         // 0 is top, 1 is right, 2 is down, 3 is left, -1 is not moving
         Set<Object[]> neighbors = new HashSet<>();
-        if (x - 1 < 0) {
-            neighbors.add(new Object[]{new Point(0, y), 0});
-        } else if (ifNeighbor(grid[x - 1][y])) {
-            neighbors.add(new Object[]{new Point(x - 1, y), 0});
-        }
-        if (x + 1 > grid.length - 1) {
-            neighbors.add(new Object[]{new Point(grid.length - 1, y), 2});
-        } else if (ifNeighbor(grid[x + 1][y])) {
-            neighbors.add(new Object[]{new Point(x + 1, y), 2});
+        if (y >=0 && y <= grid[0].length - 1) {
+            if (x - 1 < 0) {
+                neighbors.add(new Object[]{new Point(0, y), 0});
+            } else if (ifNeighbor(grid[x - 1][y])) {
+                neighbors.add(new Object[]{new Point(x - 1, y), 0});
+            }
+            if (x + 1 > grid.length - 1) {
+                neighbors.add(new Object[]{new Point(grid.length - 1, y), 2});
+            } else if (ifNeighbor(grid[x + 1][y])) {
+                neighbors.add(new Object[]{new Point(x + 1, y), 2});
+            }
         }
         if (y - 1 < 0) {
             neighbors.add(new Object[]{new Point(x, 0), 3});
