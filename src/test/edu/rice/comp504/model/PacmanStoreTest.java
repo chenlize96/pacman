@@ -40,32 +40,9 @@ public class PacmanStoreTest {
     private String[][] grid;
     private int row;
     private int col;
+
     public String[][] initializeLevel(String level, int ghostNum, String fruitType) {
-        String input = LevelStore.getTheLevel(level);
-        row = 0;
-        col = 0;
-        String[] lineSplit = input.split("\n");
-        while (row < lineSplit.length) {
-            String[] line = lineSplit[row].split(" ");
-            col += line.length;
-            row++;
-        }
-        col = col / row;
-        grid = new String[row][col];
-        //
-        row = 0;
-        int sum = 0; // indicate the number of small dots
-        while (row < lineSplit.length) {
-            String[] line = lineSplit[row].split(" ");
-            for (col = 0; col < line.length; col++) {
-                if (line[col].equals("D")) {
-                    sum++;
-                }
-                grid[row][col] = line[col];
-            }
-            row++;
-        }
-        System.out.println(sum);
+        grid = LevelStore.getTheLevel(level);
         return grid;
     }
      PacmanStore test = new PacmanStore();

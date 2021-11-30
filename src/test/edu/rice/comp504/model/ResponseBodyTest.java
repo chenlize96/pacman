@@ -13,7 +13,7 @@ public class ResponseBodyTest {
     private int score;
     private boolean fruitAppear;
     private int lives;
-    ResponseBody test = new ResponseBody(null, null, 1, true, 3);
+    ResponseBody test = new ResponseBody(null, null, 1, true, 3,true);
 
     @Test
     public void setDynamics() {

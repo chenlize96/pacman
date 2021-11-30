@@ -35,7 +35,7 @@ public class GhostTest {
 
     @Test
     public void getStrategy() {
-        assertEquals(test.getStrategy(), GhostStrategyFac.makeStrategyFactory().make("chase"));
+        assertEquals(test.getStrategy(), GhostStrategyFac.makeStrategyFactory().make(""));
     }
     @Test
     public void nextLocation() {
