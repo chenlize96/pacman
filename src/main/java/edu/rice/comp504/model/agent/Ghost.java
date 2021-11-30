@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Ghost extends ACharacter {
 
     private IUpdateStrategy movingStrategy;    //the strategy of moving
+    private IUpdateStrategy bornStrategy; //Original strategy of a ghost
     private String name;
     private String ghostStatus; // "normal", "vulnerable_dark_blue", "vulnerable_blink", "dead"
     private boolean fresh;
@@ -25,6 +26,7 @@ public class Ghost extends ACharacter {
         super(type, loc, bornLoc, currDir);
         this.fresh = true; // used to fresh a star algorithm periodically
         movingStrategy = GhostStrategyFac.makeStrategyFactory().make("");
+        bornStrategy = GhostStrategyFac.makeStrategyFactory().make("");
         ghostStatus = "normal";
     }
 
@@ -118,6 +120,9 @@ public class Ghost extends ACharacter {
      */
     public void setStrategy(IUpdateStrategy newMovingStrategy) {
         this.movingStrategy = newMovingStrategy;
+        if(bornStrategy.getName().equals("null")){
+            this.bornStrategy = newMovingStrategy;
+        }
     }
 
     /**
@@ -167,5 +172,12 @@ public class Ghost extends ACharacter {
      */
     public void setGhostStatus(String ghostStatus) {
         this.ghostStatus = ghostStatus;
+    }
+
+    /**
+     * set ghost status.
+     */
+    public void resetBornStrategy(){
+        this.movingStrategy = bornStrategy;
     }
 }
