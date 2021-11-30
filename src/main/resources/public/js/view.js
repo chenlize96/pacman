@@ -35,6 +35,8 @@ let pacmanVelX;
 let pacmanVelY;
 let framePerInterval = 20;
 
+let bigDotLocs = [];
+let bigDotBlink = 0;
 
 let ghostFrame;
 let ghostCount;
@@ -476,6 +478,23 @@ function dynamicRender(data) {
         }
     });
 
+    console.log(bigDotLocs.length);
+
+    bigDotLocs.forEach(function(obj) {
+        console.log(obj);
+        let locX = obj.x;
+        let locY = obj.y;
+        app.drawFullImage(floorImg, locX, locY, wScale, hScale);
+        console.log(bigDotBlink % 2);
+        if(bigDotBlink % 2 === 0) {
+            app.drawFullImage(floorImg, locX, locY, wScale, hScale);
+        } else {
+            app.drawFullImage(dotImg, locX - wScale / 2, locY - hScale / 2, wScale * 2, hScale * 2);
+        }
+    });
+
+    bigDotBlink ++;
+
     eatenDot.forEach(function(obj) {
         let locX = obj.loc.y * wScale;
         let locY = obj.loc.x * hScale;
@@ -599,6 +618,8 @@ function mapRender(map2DArray) {
                 // Draw small dot
                 app.drawFullImage(dotImg, locX, locY, wScale, hScale);
             } else if (map2DArray[h][w] === 'L') {
+                // Store the loc
+                bigDotLocs.push({x: locX, y: locY})
                 // Draw large dot
                 app.drawFullImage(dotImg, locX - wScale / 2, locY - hScale / 2,
                     wScale * 2, hScale * 2);
