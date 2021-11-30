@@ -18,6 +18,7 @@ public class Ghost extends ACharacter {
     private String ghostStatus; // "normal", "vulnerable_dark_blue", "vulnerable_blink", "dead"
     private boolean fresh;
     private ArrayList<Integer> path = new ArrayList<>();
+    private ArrayList<Integer> deathPath = new ArrayList<>();
 
 
     public Ghost(String type, Point loc, Point bornLoc, int currDir) {
@@ -25,6 +26,20 @@ public class Ghost extends ACharacter {
         this.fresh = true; // used to fresh a star algorithm periodically
         movingStrategy = GhostStrategyFac.makeStrategyFactory().make("");
         ghostStatus = "normal";
+    }
+
+    /**
+     * Set the death path of ghost.
+     */
+    public void setDeathPath(ArrayList<Integer> path) {
+        this.deathPath = deathPath;
+    }
+
+    /**
+     * Get the death path of ghost.
+     */
+    public ArrayList<Integer> getDeathPath() {
+        return deathPath;
     }
 
     /**
