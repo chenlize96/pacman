@@ -48,6 +48,7 @@ public class PacmanController {
             //System.out.println(request.queryMap().value("level"));
             dis.removeAll();
             //clear
+            PacmanStore.setLive(3);
             PacmanStore.setCurrentFrame(-1);
             PacmanStore.setNumEatenGhost(0);
             // extension for ghost num and fruit type
