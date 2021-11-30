@@ -25,9 +25,12 @@ public class AmbushStrategyTest extends TestCase {
     public void testFixedLoc() {
         IUpdateStrategy test = AmbushStrategy.make();
         Pacman test2 = new Pacman("pacman", new Point(1,1), new Point(1,1), 0);
-        Point test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
+        Point test3 = ((AmbushStrategy)test).fixedLoc(1,1,0,0,PacmanStore.getLetterGrid());
         test2 = new Pacman("pacman", new Point(1,1), new Point(1,1), 3);
-        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
+        test3 = ((AmbushStrategy)test).fixedLoc(1,1,0,1,PacmanStore.getLetterGrid());
+        test3 = ((AmbushStrategy)test).fixedLoc(1,1,1,1,PacmanStore.getLetterGrid());
+        test3 = ((AmbushStrategy)test).fixedLoc(1,1,2,1,PacmanStore.getLetterGrid());
+        test3 = ((AmbushStrategy)test).fixedLoc(1,1,3,1,PacmanStore.getLetterGrid());
 //        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 2);
 //        test3 = ((AmbushStrategy)test).fixedMarginLoc(test2);
 //        test2 = new Pacman("pacman", new Point(5,5), new Point(6,6), 1);
