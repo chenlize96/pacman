@@ -58,6 +58,7 @@ public class InteractCmd implements IPaintObjCmd {
         if (PacmanStore.getCurrentFrame() != -1) {
             PacmanStore.setCurrentFrame(PacmanStore.getCurrentFrame() + 1);
         }
+        reborn();
         if (PacmanStore.getCurrentFrame() == PacmanStore.getDarkBlueFrames() + PacmanStore.getBlinkFrames() + 1) {
             // all ghosts set to vulnerable_blink except those dead ones
             becomeNormal();
@@ -128,8 +129,10 @@ public class InteractCmd implements IPaintObjCmd {
         for (PropertyChangeListener pcl : iCharacters) {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
-                ghost.setGhostStatus("normal");
-                ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
+                if(!ghost.getGhostStatus().equals("dead")){
+                    ghost.setGhostStatus("normal");
+                    ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
+                }
             }
         }
         PacmanStore.setCurrentFrame(-1);
@@ -174,6 +177,21 @@ public class InteractCmd implements IPaintObjCmd {
             }
             Point point = character.getBornLoc();
             ((ACharacter) pcl).setLoc(point);
+        }
+    }
+
+    /**
+     * Reborn all ghosts back home.
+     * */
+    private void reborn(){
+        for (PropertyChangeListener pcl : iCharacters) {
+            if (((APaintObject) pcl).getType().equals("ghost")) {
+                Ghost ghost = (Ghost) pcl;
+                if(ghost.getGhostStatus().equals("dead")&& ghost.getLoc().equals(ghost.getBornLoc())){
+                    ghost.setGhostStatus("normal");
+                    ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
+                }
+            }
         }
     }
 }
