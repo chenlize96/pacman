@@ -461,7 +461,7 @@ function ghostRender(ghost) {
  */
 function dynamicRender(data) {
     dynamicApp.clear();
-    console.log(data);
+    //console.log(data);
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
     let score = data.score;
@@ -486,14 +486,14 @@ function dynamicRender(data) {
         }
     });
 
-    console.log(bigDotLocs.length);
+    //console.log(bigDotLocs.length);
 
     bigDotLocs.forEach(function(obj) {
-        console.log(obj);
+        //console.log(obj);
         let locX = obj.x;
         let locY = obj.y;
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
-        console.log(bigDotBlink % 2);
+        //console.log(bigDotBlink % 2);
         if(bigDotBlink % 2 === 0) {
             app.drawFullImage(floorImg, locX, locY, wScale, hScale);
         } else {
@@ -542,12 +542,12 @@ function dynamicRender(data) {
     if(eatenAll){
         if(level=="easy"){
             alert("You finished easy level, now entering hard level!");
-            clear();
+            //clear();
             getHardLevel();
         }
         else{
             alert("You finished hard level, now starting new game!");
-            clear();
+            //clear();
             getEasyLevel()
         }
         //intervalID = setInterval(updateWorld, 500);
@@ -724,17 +724,18 @@ function getEasyLevel() {
  * Set the hard level
  */
 function getHardLevel() {
+    clear();
     $.post("/level", {level: "hard",fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
         console.log(data);
-        clear();
+
         mapRender(data);
-        clearInterval(intervalID);
-        clearInterval(frameInterval);
-        intervalID = -1;
-        frameInterval = -1;
-        intervalID = setInterval(updateWorld, 500);
         level = "hard";
     }, "json");
+    clearInterval(intervalID);
+    clearInterval(frameInterval);
+    intervalID = -1;
+    frameInterval = -1;
+    intervalID = setInterval(updateWorld, 500);
 }
 
 /**
