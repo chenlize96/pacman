@@ -13,6 +13,15 @@ public class ResponseBody {
     private int lives;
     private boolean eatenAll;
 
+    /**
+     * Response Body.
+     * @param dynamics the dynamics
+     * @param eaten the eaten dots
+     * @param score the score
+     * @param fruitAppear the status of fruit
+     * @param lives the lives
+     * @param eatenAll the status of eaten dots
+     */
     public ResponseBody(PropertyChangeListener[] dynamics, AItem[] eaten, int score,
                         boolean fruitAppear, int lives, boolean eatenAll) {
         this.dynamics = dynamics;
