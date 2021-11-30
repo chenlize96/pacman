@@ -1,5 +1,7 @@
 package edu.rice.comp504.model.strategy;
 
+import edu.rice.comp504.model.PacmanStore;
+import edu.rice.comp504.model.agent.Ghost;
 import edu.rice.comp504.model.agent.Pacman;
 import junit.framework.TestCase;
 
@@ -19,6 +21,7 @@ public class AmbushStrategyTest extends TestCase {
 
     }
 
+
     public void testFixedLoc() {
         IUpdateStrategy test = AmbushStrategy.make();
         Pacman test2 = new Pacman("pacman", new Point(1,1), new Point(1,1), 0);
@@ -32,5 +35,25 @@ public class AmbushStrategyTest extends TestCase {
     }
 
     public void testUpdateState() {
+        IUpdateStrategy test = AmbushStrategy.make();
+        Pacman test3 = new Pacman("pacman", new Point(1,1), new Point(1,1), 0);
+        Ghost test2 = new Ghost("ghost", new Point(1,1), new Point(1,1), 0);
+        test.updateState(test2,test3);
     }
+
+    public void testFixedMarginLoc() {
+        IUpdateStrategy test = AmbushStrategy.make();
+        Pacman test3 = new Pacman("pacman", new Point(1,1), new Point(1,1), 0);
+        ((AmbushStrategy)test).fixedMarginLoc(test3);
+//        test3 = new Pacman("pacman", new Point(26,26), new Point(1,1), 1);
+//        ((AmbushStrategy)test).fixedMarginLoc(test3);
+//        test3 = new Pacman("pacman", new Point(26,26), new Point(1,1), 2);
+//        ((AmbushStrategy)test).fixedMarginLoc(test3);
+        test3 = new Pacman("pacman", new Point(1,1), new Point(1,1), 3);
+        ((AmbushStrategy)test).fixedMarginLoc(test3);
+        test3 = new Pacman("pacman", new Point(1,1), new Point(1,1), 4);
+        ((AmbushStrategy)test).fixedMarginLoc(test3);
+    }
+
+
 }
