@@ -26,7 +26,9 @@ public class PacmanController {
             System.out.println("do not delete this line");
             // extension for ghost num and fruit type
             int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
+            System.out.println(ghostNum);
             String fruitType = request.queryMap().value("fruitType"); // S or A
+            System.out.println(fruitType);
             return gson.toJson(dis.initializeLevel("easy",ghostNum,fruitType));
         });
 
