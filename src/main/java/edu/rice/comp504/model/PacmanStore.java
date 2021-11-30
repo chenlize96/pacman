@@ -450,4 +450,16 @@ public class PacmanStore {
         }
         return 0;
     }
+
+    public static void setLive(int live) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                APaintObject object = grid[i][j];
+                if (object.getType().equals("pacman")) {
+                    ((Pacman) object).setLives(live);
+                    return;
+                }
+            }
+        }
+    }
 }
