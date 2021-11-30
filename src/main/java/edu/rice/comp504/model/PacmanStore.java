@@ -1,6 +1,7 @@
 package edu.rice.comp504.model;
 
 //import edu.rice.comp504.model.item.APaintObject;
+
 import edu.rice.comp504.model.agent.Ghost;
 import edu.rice.comp504.model.agent.Pacman;
 import edu.rice.comp504.model.cmd.InteractCmd;
@@ -26,15 +27,16 @@ public class PacmanStore {
     private static APaintObject[][] grid;
     private static String[][] info;
     private static int score;
-    private static List<AItem> eatenItems;
+    private static List<AItem> eatenItems = new ArrayList<>();
     private static long lastFruitAppearTime;
     private static final long fruitDisappearTime = 5000; //5s
     private static final long fruitAppearTime = 5000; //5s
     private static boolean fruitAppear;
     private static int currentFrame = -1;
     private static int numEatenGhost = 0;
+    private static int numDots = 0;
 
-    private static final int[] Ghost_Score_List = new int[]{200,400,800,1600};
+    private static final int[] Ghost_Score_List = new int[]{200, 400, 800, 1600};
     private static final int Dark_Blue_Frames = 100;
     private static final int Blink_Frames = 50;
 
@@ -48,9 +50,11 @@ public class PacmanStore {
 
     /**
      * Initialize the game.
+     *
      * @param info the letter map
      */
     public void initialize(String[][] info, int ghostNum, String fruitType) {
+        numDots = 0;
         this.info = info;
         score = 0;
         eatenItems = new ArrayList<>();
@@ -71,15 +75,17 @@ public class PacmanStore {
                         break;
                     case "D":
                         obj = new Dot(loc);
+                        numDots++;
                         break;
                     case "L":
                         obj = new BigDot(loc);
+                        numDots++;
                         break;
                     case "E":
                         obj = new EmptyCell(loc);
                         break;
                     case "S":
-                        obj = new Fruit(loc,1000,fruitType);
+                        obj = new Fruit(loc, 1000, fruitType);
                         break;
                     case "P":
                         obj = new Pacman("pacman", loc, loc, 1); // dir = right
@@ -99,7 +105,7 @@ public class PacmanStore {
                         }
                         break;
                     case "2":
-                        if (ghostNum >= 2) {
+                        if (ghostNum >= 4) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("pink");
                             ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("ambush"));
@@ -119,10 +125,10 @@ public class PacmanStore {
                         }
                         break;
                     case "4":
-                        if (ghostNum >= 4) {
+                        if (ghostNum >= 2) {
                             obj = new Ghost("ghost", loc, loc, 1); // dir = right
                             ((Ghost) obj).setName("cyan");
-                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("random"));
+                            ((Ghost) obj).setStrategy(GhostStrategyFac.makeStrategyFactory().make("avoid"));
                             addCharacterToStore((PropertyChangeListener) obj);
                         } else {
                             obj = new EmptyCell(loc);
@@ -135,10 +141,21 @@ public class PacmanStore {
                 grid[row][col] = obj;
             }
         }
+        System.out.println("the total dots = " + numDots);
+    }
+
+    /**
+     * Get the number of dots.
+     *
+     * @return the number of dots
+     */
+    public static int getNumDots() {
+        return numDots;
     }
 
     /**
      * Return the grid.
+     *
      * @return grid
      */
     public static APaintObject[][] getGrid() {
@@ -147,6 +164,7 @@ public class PacmanStore {
 
     /**
      * Return the letter grid.
+     *
      * @return grid
      */
     public static String[][] getLetterGrid() {
@@ -155,6 +173,7 @@ public class PacmanStore {
 
     /**
      * Create the ghost strategy.
+     *
      * @return the ghost strategy
      */
     public static GhostStrategyFac getOnlyStratFac() {
@@ -168,6 +187,7 @@ public class PacmanStore {
 
     /**
      * add an eaten item to the list.
+     *
      * @param item eaten item.
      */
     public static void addEatenItems(AItem item) {
@@ -176,6 +196,7 @@ public class PacmanStore {
 
     /**
      * Get the canvas dimensions.
+     *
      * @return The canvas dimensions
      */
     public static Point getCanvasDims() {
@@ -184,6 +205,7 @@ public class PacmanStore {
 
     /**
      * Set the canvas dimensions.
+     *
      * @param dims The canvas width (x) and height (y).
      */
     public void setCanvasDims(Point dims) {
@@ -197,9 +219,9 @@ public class PacmanStore {
         // update fruit
         long currentTime = System.currentTimeMillis();
         //System.out.println(currentTime+"  "+(lastFruitAppearTime + fruitAppearTime)+" "+(lastFruitAppearTime + fruitAppearTime + fruitDisappearTime));
-        if(currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
+        if (currentTime >= lastFruitAppearTime + fruitAppearTime && currentTime < lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
             setFruitAppear(false);
-        } else if(!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime){
+        } else if (!fruitAppear && currentTime >= lastFruitAppearTime + fruitAppearTime + fruitDisappearTime) {
             //System.out.println("pass here" + currentTime);
             setFruitAppear(true);
             // TODO: performance issue, 240 dots, acceptable?
@@ -224,6 +246,7 @@ public class PacmanStore {
 
     /**
      * Get all the listeners.
+     *
      * @return the listeners
      */
     public PropertyChangeListener[] getListeners() {
@@ -243,6 +266,7 @@ public class PacmanStore {
 
     /**
      * Set the current direction of pacman.
+     *
      * @param curDir the current direction
      */
     public static void setPacmanDir(int curDir) {
@@ -255,7 +279,8 @@ public class PacmanStore {
 
     /**
      * Add a character that will listen for a property change (i.e. time elapsed)
-     * @param pcl  The ball
+     *
+     * @param pcl The ball
      */
     public static void addCharacterToStore(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener("theClock", pcl);
@@ -272,13 +297,15 @@ public class PacmanStore {
 
     /**
      * Remove the target property change listeners.
-     * @param wall  The inner wall
+     *
+     * @param wall The inner wall
      */
     public static void removeTheGhost(PropertyChangeListener wall) {
     }
 
     /**
      * isFruitAppear.
+     *
      * @return fruitAppear.
      */
     public static boolean isFruitAppear() {
@@ -295,6 +322,7 @@ public class PacmanStore {
 
     /**
      * getScore.
+     *
      * @return score.
      */
     public static int getScore() {
@@ -310,6 +338,7 @@ public class PacmanStore {
 
     /**
      * getEatenItems.
+     *
      * @return eatenItems.
      */
     public static List<AItem> getEatenItems() {
@@ -318,6 +347,7 @@ public class PacmanStore {
 
     /**
      * getLastFruitAppearTime.
+     *
      * @return lastFruitAppearTime.
      */
     public long getLastFruitAppearTime() {
@@ -326,6 +356,7 @@ public class PacmanStore {
 
     /**
      * setLastFruitAppearTime.
+     *
      * @param lastFruitAppearTime lastFruitAppearTime.
      */
     public void setLastFruitAppearTime(long lastFruitAppearTime) {
@@ -334,6 +365,7 @@ public class PacmanStore {
 
     /**
      * getCurrentFrame.
+     *
      * @return currentFrame.
      */
     public static int getCurrentFrame() {
@@ -349,6 +381,7 @@ public class PacmanStore {
 
     /**
      * getNumEatenGhost.
+     *
      * @return numEatenGhost.
      */
     public static int getNumEatenGhost() {
@@ -364,6 +397,7 @@ public class PacmanStore {
 
     /**
      * getDarkBlueFrames.
+     *
      * @return Dark_Blue_Frames.
      */
     public static int getDarkBlueFrames() {
@@ -372,6 +406,7 @@ public class PacmanStore {
 
     /**
      * getBlinkFrames.
+     *
      * @return Blink_Frames.
      */
     public static int getBlinkFrames() {
@@ -380,6 +415,7 @@ public class PacmanStore {
 
     /**
      * get ghost score lists.
+     *
      * @return score lists.
      */
     public static int[] getGhostScoreList() {
@@ -389,14 +425,18 @@ public class PacmanStore {
 
     /**
      * get lives.
+     *
      * @return lives.
      */
     public static int getLives() {
+        if (grid == null) {
+            return 0;
+        }
         for (int i = 0; i < grid.length; i++) {
-            for(int j = 0; j < grid[0].length; j++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 APaintObject object = grid[i][j];
                 if (object.getType().equals("pacman")) {
-                    return ((Pacman)object).getLives();
+                    return ((Pacman) object).getLives();
                 }
             }
         }

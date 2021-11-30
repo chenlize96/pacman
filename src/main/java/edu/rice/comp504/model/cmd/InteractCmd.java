@@ -37,7 +37,7 @@ public class InteractCmd implements IPaintObjCmd {
             // we can only collide with ghost whose status is not dead
             while (collideWithGhost(pacman) != null) {
                 int currentFrame = PacmanStore.getCurrentFrame();
-                if(currentFrame > 0) {
+                if (currentFrame > 0) {
                     // ghost and score related
                     Ghost ghost = collideWithGhost(pacman);
                     ghost.setGhostStatus("dead");
@@ -46,8 +46,8 @@ public class InteractCmd implements IPaintObjCmd {
 
                     PacmanStore.setNumEatenGhost(PacmanStore.getNumEatenGhost() + 1);
                     int[] ghostScoreList = PacmanStore.getGhostScoreList();
-                    PacmanStore.setScore(PacmanStore.getScore() + ghostScoreList[Math.min(PacmanStore.getNumEatenGhost(),ghostScoreList.length - 1)]);
-                } else if(currentFrame == -1){ // currentFrame == -1
+                    PacmanStore.setScore(PacmanStore.getScore() + ghostScoreList[Math.min(PacmanStore.getNumEatenGhost(), ghostScoreList.length - 1)]);
+                } else if (currentFrame == -1) { // currentFrame == -1
                     Ghost ghost = collideWithGhost(pacman); //todo check ghost's status.
                     resetCharacters(); //Pacman dies for now. todo pacman can eat ghosts.
                     break;
@@ -129,7 +129,7 @@ public class InteractCmd implements IPaintObjCmd {
         for (PropertyChangeListener pcl : iCharacters) {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
-                if(!ghost.getGhostStatus().equals("dead")){
+                if (!ghost.getGhostStatus().equals("dead")) {
                     ghost.setGhostStatus("normal");
                     ghost.resetBornStrategy();
                     //ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));
@@ -156,9 +156,13 @@ public class InteractCmd implements IPaintObjCmd {
                     return ghost;
                 }
                 //Check the edge case of pacman and ghost switch positions.
-                if (ghost.getLoc().distance(pacman.getLoc()) != 1) continue;
+                if (ghost.getLoc().distance(pacman.getLoc()) != 1) {
+                    continue;
+                }
                 int dirDiff = Math.abs(ghost.getDir() - pacman.getDir());
-                if (dirDiff == 2) return ghost;
+                if (dirDiff == 2) {
+                    return ghost;
+                }
             }
         }
 
@@ -183,12 +187,12 @@ public class InteractCmd implements IPaintObjCmd {
 
     /**
      * Reborn all ghosts back home.
-     * */
-    private void reborn(){
+     */
+    private void reborn() {
         for (PropertyChangeListener pcl : iCharacters) {
             if (((APaintObject) pcl).getType().equals("ghost")) {
                 Ghost ghost = (Ghost) pcl;
-                if(ghost.getGhostStatus().equals("dead")&& ghost.getLoc().equals(ghost.getBornLoc())){
+                if (ghost.getGhostStatus().equals("dead") && ghost.getLoc().equals(ghost.getBornLoc())) {
                     ghost.setGhostStatus("normal");
                     ghost.resetBornStrategy();
                     //ghost.setStrategy(GhostStrategyFac.makeStrategyFactory().make("chase"));

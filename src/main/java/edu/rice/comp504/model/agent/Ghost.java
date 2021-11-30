@@ -21,7 +21,13 @@ public class Ghost extends ACharacter {
     private ArrayList<Integer> path = new ArrayList<>();
     private ArrayList<Integer> deathPath = new ArrayList<>();
 
-
+    /**
+     * Constructor for ghost.
+     * @param type the type
+     * @param loc the loc
+     * @param bornLoc the born loc
+     * @param currDir the current direction
+     */
     public Ghost(String type, Point loc, Point bornLoc, int currDir) {
         super(type, loc, bornLoc, currDir);
         this.fresh = true; // used to fresh a star algorithm periodically
@@ -85,6 +91,7 @@ public class Ghost extends ACharacter {
 
     /**
      * Set the name of ghost.
+     *
      * @param name the name of the ghost
      */
     public void setName(String name) {
@@ -100,14 +107,16 @@ public class Ghost extends ACharacter {
 
     /**
      * Make a ghost.
+     *
      * @param strategy a strategy
      */
-    public static Ghost makeGhost(String strategy)  {
+    public static Ghost makeGhost(String strategy) {
         return null;
     }
 
     /**
      * the strategy of moving.
+     *
      * @return the strategy of moving
      */
     public IUpdateStrategy getStrategy() {
@@ -116,11 +125,11 @@ public class Ghost extends ACharacter {
 
     /**
      * Set the moving strategy of the character.
-     * @return the strategy of moving
+     *
      */
     public void setStrategy(IUpdateStrategy newMovingStrategy) {
         this.movingStrategy = newMovingStrategy;
-        if(bornStrategy.getName().equals("null")){
+        if (bornStrategy.getName().equals("null")) {
             this.bornStrategy = newMovingStrategy;
         }
     }
@@ -160,6 +169,7 @@ public class Ghost extends ACharacter {
 
     /**
      * get ghost status.
+     *
      * @return ghost status.
      */
     public String getGhostStatus() {
@@ -168,6 +178,7 @@ public class Ghost extends ACharacter {
 
     /**
      * set ghost status.
+     *
      * @param ghostStatus ghost status.
      */
     public void setGhostStatus(String ghostStatus) {
@@ -177,7 +188,7 @@ public class Ghost extends ACharacter {
     /**
      * set ghost status.
      */
-    public void resetBornStrategy(){
+    public void resetBornStrategy() {
         this.movingStrategy = bornStrategy;
     }
 }

@@ -455,7 +455,7 @@ function dynamicRender(data) {
     let dynamics = data.dynamics;
     let eatenDot = data.eaten;
     let score = data.score;
-    let dotNum = 0;
+    let eatenAll = data.eatenAll;
     dynamics.forEach(function(obj) {
         obj = obj.listener;
         //console.log(obj)
@@ -479,9 +479,9 @@ function dynamicRender(data) {
     eatenDot.forEach(function(obj) {
         let locX = obj.loc.y * wScale;
         let locY = obj.loc.x * hScale;
-        if(obj.type == "dot") {
+        /*if(obj.type == "dot") {
             dotNum++;
-        }
+        }*/
         app.drawFullImage(floorImg, locX, locY, wScale, hScale);
     });
 
@@ -512,7 +512,7 @@ function dynamicRender(data) {
     let scoreText = document.getElementById("score_text");
     scoreText.innerText = "Score: " + score;
 
-    if(dotNum==240){
+    if(eatenAll){
         if(level=="easy"){
             alert("You finished easy level, now entering hard level!");
             clear();

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Use for pink. Advanced four units before the pacman direction.
  */
-public class AmbushStrategy implements IUpdateStrategy{
+public class AmbushStrategy implements IUpdateStrategy {
     private static IUpdateStrategy singleton;
 
     /**
@@ -33,6 +33,7 @@ public class AmbushStrategy implements IUpdateStrategy{
 
     /**
      * Based on the location of pacman to fix the target.
+     *
      * @return a new point
      */
     private Point fixedMarginLoc(Pacman pacman) {
@@ -44,23 +45,38 @@ public class AmbushStrategy implements IUpdateStrategy{
                 if (cur.x - 4 <= 0) {
                     return new Point(1, cur.y);
                 }
+                break;
             case 1: // right
                 if (cur.y + 4 >= grid[0].length - 1) {
                     return new Point(cur.x, grid[0].length - 2);
                 }
+                break;
             case 2: // down
                 if (cur.x + 4 >= grid.length - 1) {
-                    return new Point (grid.length - 2, cur.y);
+                    return new Point(grid.length - 2, cur.y);
                 }
+                break;
             case 3: // left
                 if (cur.y - 4 <= 0) {
                     return new Point(cur.x, 1);
                 }
+                break;
             default:
-                return fixedLoc(cur.x, cur.y, dir, 4, grid);
+                break;
         }
+        return fixedLoc(cur.x, cur.y, dir, 4, grid);
     }
 
+    /**
+     * Use recursion to find the fixed point.
+     *
+     * @param x      the x
+     * @param y      the y
+     * @param dir    the direction
+     * @param cutoff the cutoff
+     * @param grid   the grid
+     * @return the point
+     */
     public Point fixedLoc(int x, int y, int dir, int cutoff, String[][] grid) {
         if (cutoff == 0) {
             return new Point(x, y);
