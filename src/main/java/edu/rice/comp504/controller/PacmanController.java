@@ -30,14 +30,14 @@ public class PacmanController {
             PacmanStore.setNumEatenGhost(0);
             // extension for ghost num and fruit type
             int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
-            System.out.println(ghostNum);
+            //System.out.println(ghostNum);
             String fruitType = request.queryMap().value("fruitType"); // S or A
-            System.out.println(fruitType);
+            //System.out.println(fruitType);
             return gson.toJson(dis.initializeLevel("easy",ghostNum,fruitType));
         });
 
         get("/update", (request, response) -> {
-            System.out.println(request.queryMap().value("pacmanDirection"));
+            //System.out.println(request.queryMap().value("pacmanDirection"));
             dis.setPacmanDir(Integer.parseInt(request.queryMap().value("pacmanDirection")));
             return gson.toJson(dis.updatePacmanWorld());
         });
