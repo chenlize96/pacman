@@ -712,6 +712,9 @@ function getEasyLevel() {
     clear();
     bigDotLocs = [];
     level = "easy";
+    $("#life_1").show();
+    $("#life_2").show();
+    $("#life_3").show();
     canvasDims();
     //canvasDims();
     clearInterval(intervalID);
@@ -726,6 +729,9 @@ function getEasyLevel() {
  */
 function getHardLevel() {
     clear();
+    $("#life_1").show();
+    $("#life_2").show();
+    $("#life_3").show();
     bigDotLocs = [];
     $.post("/level", {level: "hard",fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
         console.log(data);
