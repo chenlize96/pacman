@@ -51,6 +51,8 @@ public class InteractCmd implements IPaintObjCmd {
                     Ghost ghost = collideWithGhost(pacman); //todo check ghost's status.
                     resetCharacters(); //Pacman dies for now. todo pacman can eat ghosts.
                     break;
+                } else {
+                    break;
                 }
             }
         }
