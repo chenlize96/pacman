@@ -451,6 +451,10 @@ public class PacmanStore {
         return 0;
     }
 
+    /**
+     * Set the live.
+     * @param live the live
+     */
     public static void setLive(int live) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
