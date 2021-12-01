@@ -3,7 +3,7 @@
 ## Team Dog
 https://pacman-final-team-dog.herokuapp.com/
 
-Please use W, A, S, D to move the pacman.
+Please use W, A, S, D or Arrow keys to move the pacman.
 
 Team Lead: Lize Chen
 
