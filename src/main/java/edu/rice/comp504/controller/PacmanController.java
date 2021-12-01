@@ -25,6 +25,9 @@ public class PacmanController {
 
         post("/canvas/dims", (request, response) -> {
             System.out.println("do not delete this line");
+            //clear
+            PacmanStore.setCurrentFrame(-1);
+            PacmanStore.setNumEatenGhost(0);
             // extension for ghost num and fruit type
             int ghostNum = Integer.parseInt(request.queryMap().value("ghostNum")); //1,2,3,4
             System.out.println(ghostNum);
