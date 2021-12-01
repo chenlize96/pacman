@@ -162,7 +162,14 @@ public class PacmanStoreTest {
         test.initialize(initializeLevel(hard, 4, "apple"), 4, "apple");
         PacmanStore.getLives();
     }
-
+    @Test
+    public void setLive() {
+        test.initialize(initializeLevel(hard, 4, "apple"), 4, "apple");
+        test.setLive(2);
+        test.removeCharactersFromStore();
+        PacmanStore.getGhostScoreList();
+        PacmanStore.setPacmanDir(1);
+    }
     @Test
     public void updatePacmanWorld() {
         PacmanStore.updatePacmanWorld();

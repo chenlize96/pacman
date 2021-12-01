@@ -36,5 +36,10 @@ public class RandomChaseStrategyTest extends TestCase {
         ((RandomChaseStrategy)test).updateState(test2, test3);
         test2 = new Ghost("ghost", new Point(3,1), new Point(1,1), 0);
         ((RandomChaseStrategy)test).updateState(test2, test3);
+        test3 = new Pacman("pacman", new Point(2,2), new Point(1,1), 0);
+        ((RandomChaseStrategy)test).updateState(test2, test3);
+        ((RandomChaseStrategy)test).updateState(test2, test3);
+        ((RandomChaseStrategy)test).updateState(test2, test3);
+
     }
 }
