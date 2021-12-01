@@ -48,7 +48,9 @@ public class PacmanStoreTest {
      PacmanStore test = new PacmanStore();
     @Test
     public void initialize() {
-       test.initialize(initializeLevel(hard, 4, "apple"), 4, "apple");
+        for(int i=1;i<=4;i++){
+            test.initialize(initializeLevel(hard, i, "apple"), i, "apple");
+        }
     }
 
     @Test
@@ -123,8 +125,8 @@ public class PacmanStoreTest {
     }
     @Test
     public void setCurrentFrame() {
-        PacmanStore.setCurrentFrame(1);
-        assertEquals(PacmanStore.getCurrentFrame(), 1);
+        PacmanStore.setCurrentFrame(-1);
+        assertEquals(PacmanStore.getCurrentFrame(), -1);
     }
     @Test
     public void getCurrentFrame() {
