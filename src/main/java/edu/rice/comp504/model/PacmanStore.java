@@ -290,8 +290,8 @@ public class PacmanStore {
      */
     public static void addCharacterToStore(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener("theClock", pcl);
-        System.out.println(pcl);
-        System.out.println(1);
+        //System.out.println(pcl);
+        //System.out.println(1);
     }
 
     /**
@@ -456,6 +456,9 @@ public class PacmanStore {
      * @param live the live
      */
     public static void setLive(int live) {
+        if (grid == null) {
+            return;
+        }
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 APaintObject object = grid[i][j];

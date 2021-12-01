@@ -96,8 +96,8 @@ public class DispatchAdapter {
         AItem[] eaten = new AItem[PacmanStore.getEatenItems().size()];
         PacmanStore.getEatenItems().toArray(eaten);
         int num = PacmanStore.getNumDots();
-        System.out.println(1);
-        System.out.println(dynamics.length);
+        //System.out.println(1);
+        //System.out.println(dynamics.length);
         return new ResponseBody(dynamics,eaten, PacmanStore.getScore(),
                 PacmanStore.isFruitAppear(), PacmanStore.getLives(), eaten.length == num);
     }

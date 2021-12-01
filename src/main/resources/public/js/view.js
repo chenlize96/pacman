@@ -125,11 +125,11 @@ window.onload = function() {
     gameParamInit();
     //canvasDims();
     $("#fruit").change(function () {
-        console.log($(this).val());
+        //console.log($(this).val());
         fruitType = $(this).val();
     });
     $("#ghost").change(function () {
-        console.log($(this).val());
+        //console.log($(this).val());
         ghostNum = $(this).val();
     });
     //setTimeout(() => {canvasDims();} , 300);
@@ -206,10 +206,10 @@ window.onload = function() {
  * Update the world per interval.
  */
 function updateWorld() {
-    console.log(pacmanDir);
+    //console.log(pacmanDir);
     clearInterval(intervalID);
     $.get("/update", {pacmanDirection: pacmanDir}, function(data) {
-        console.log(data);
+        //console.log(data);
         clearInterval(frameInterval);
         frameInterval = setInterval(dynamicRender, 17, data);
 
@@ -273,7 +273,7 @@ function pacmanRender(pacman) {
 function ghostRender(ghost) {
     let imgSx = 0.0;
     let imgSy = 0.0;
-    console.log(ghost);
+    //console.log(ghost);
 
     switch (ghost.name) {
         case "red":
@@ -699,7 +699,7 @@ function mapRender(map2DArray) {
  */
 function canvasDims() {
     $.post("/canvas/dims", {height: app.dims.height, width: app.dims.width, fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
-        console.log(data);
+        //console.log(data);
         mapRender(data);
     }, "json");
 }
@@ -734,7 +734,7 @@ function getHardLevel() {
     $("#life_3").show();
     bigDotLocs = [];
     $.post("/level", {level: "hard",fruitType:$("#fruit").val(), ghostNum:$("#ghost").val()}, function (data) {
-        console.log(data);
+        //console.log(data);
 
         mapRender(data);
         level = "hard";
