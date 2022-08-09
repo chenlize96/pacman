@@ -1,7 +1,6 @@
-# Game Development 
+# Game Development - Pacman
 
-## Team Dog
-https://pacman-final-team-dog.herokuapp.com/
+Link: https://pacman-final-team-dog.herokuapp.com/
 
 Please use W, A, S, D or Arrow keys to move the pacman.
 
